@@ -1,0 +1,31 @@
+from asesora.models import Asesoria
+from rest_framework import mixins, generics
+from rest_framework.permissions import IsAuthenticated
+
+from .serializers import ListAsesoriaSerializer, CreateAsesoriaSerializer
+
+class AsesoriaListAV(mixins.ListModelMixin, generics.GenericAPIView):
+
+    permission_classes = [IsAuthenticated]
+
+    queryset = Asesoria.objects.all() # to-do: filtrar de acuerdo a la id del cliente
+
+    serializer_class = ListAsesoriaSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class AsesoriaCreateAV(mixins.CreateModelMixin, generics.GenericAPIView):
+
+    serializer_class = CreateAsesoriaSerializer
+
+    def perform_create(self, serializer):
+        cliente = self.request.user
+
+        # Asigna el usuario autenticado como autor del objeto
+        serializer.save(fkCliente=cliente)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+    
