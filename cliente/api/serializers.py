@@ -6,7 +6,6 @@ class ListAsesoriaSerializer(serializers.ModelSerializer):
     tipo_asesoria = serializers.CharField(source='tipo_asesoria.descripcion') 
     estado_asesoria = serializers.CharField(source='estado_asesoria.descripcion')
     fkCliente = serializers.StringRelatedField(read_only=True)
-    # fkCliente = serializers.CharField(source='cliente.direccion')
 
     class Meta:
         model = Asesoria
@@ -27,3 +26,10 @@ class CreateAsesoriaSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Asesoria.objects.create(**validated_data)
     
+class DetailAsesoriaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Asesoria
+        exclude = ['fkCliente']
+
+

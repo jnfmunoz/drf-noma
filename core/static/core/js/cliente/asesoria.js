@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
     function buildList() {
-        const url = 'http://127.0.0.1:8000/cliente-api/list-asesoria-cliente-api/';
+        // const url = 'http://127.0.0.1:8000/cliente-api/list-asesoria-cliente-api/';
+        const url = 'http://127.0.0.1:8000/cliente-api/asesoria/list/'
 
         fetch(url)
             .then((response) => response.json())
@@ -49,8 +50,9 @@ $(document).ready(function(){
         };
 
         // URL de la API a la que deseas hacer la solicitud POST
-        let url = "http://127.0.0.1:8000/cliente-api/new-asesoria-cliente-api/";
-
+        let url = 'http://127.0.0.1:8000/cliente-api/asesoria/new/'
+        
+        
         // Realiza la solicitud POST
         // $.ajax({
         //     type: "POST",

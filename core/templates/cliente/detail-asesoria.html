@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+{% load static %}
+{% block bootstrap5_title %}No More Accidents{% endblock %}
+
+{% block content %}
+       <br>
+    <br>
+    <div class="container">
+      <div class="row">
+          <div class="col-12" id="title-container" style="text-align:center">
+            <h3>Detalle Asesoría</h3>
+          </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="container col-md-8" style="text-align: left;">
+        <h3 style="text-align: center;">Número de solicitud: 1</h3>
+        <hr>
+        <h5>Fecha Inicio: 11-09-2023</h5>
+        <h5>Fecha Término: 20-09-2023</h5>
+        <h5>Tipo de Asesoría: Fiscalización</h5>
+        <h5>Estado: En curso</h5>
+        <h5>Profesional: Sin Asignar</h5>
+        <hr>
+        <h3 style="text-align: center;">Contacto Fiscalizador</h3>
+        <h5>Nombre Fiscalizador: Peter Jackson</h5>
+        <h5>Número de teléfono: +56 9 8485 2324 </h5>
+        <h5>Correo electrónico: lorem@ipsum.cl</h5>
+    </div>
+    <br>
+    <br>
+    <div class="container col-md-8">
+      <br><br><br>
+      <div class="row">
+        <div class="container col-md-4" style="text-align: left;">
+          <a href="{% url 'asesorias' %}" class="btn btn-secondary col-md-8"><img src="{% static 'core/img/icons/previous.png' %}" alt="" width="38px" height="38px">Volver</a>
+        </div>
+        <div class="container col-md-4" style="text-align: center;">
+          <a href="{% url 'update_asesoria' %}" class="btn btn-warning col-md-12"><img src="{% static 'core/img/icons/edit.png' %}" alt="" width="38px" height="38px">Editar Solicitud</a>
+        </div>
+        <div class="container col-md-4">
+          <!-- <button>Editar</button> -->
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
