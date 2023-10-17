@@ -18,8 +18,8 @@ $(document).ready(function(){
                                                         <td class="col-2">${asesoria.tipo_asesoria}</td>
                                                         <td class="col-2">${asesoria.estado_asesoria}</td>
                                                         <td class="col-3">
-                                                            <a href="#" class="btn btn-warning btn-sm">Update</a>                                                        
-                                                            <a href="#" class="btn btn-info btn-sm">Ver Más</a>
+                                                            <a href="" class="btn btn-warning btn-sm">Update</a>                                                        
+                                                            <a href="/cliente/asesoria/detail/${asesoria.id}" class="btn btn-info btn-sm">Ver Más</a>
                                                         </td>                                                        
                                                     </tr>`
                 };
@@ -139,7 +139,7 @@ $(document).ready(function(){
                 Swal.fire("¡Éxito!", "Solicitud POST exitosa: " + response, "success");
                 
                 // Redirigir a la página de listado (reemplaza con la URL deseada)
-                window.location.href = "/cliente/list/";
+                window.location.href = "/cliente/asesoria/list/";
               })
               .fail(function(jqXHR, textStatus, errorThrown) {
                 // La solicitud POST falló
@@ -147,9 +147,56 @@ $(document).ready(function(){
               });
             }
           });
-
     });
-    
+
+    function buildDetail(){
+        // Extraer la ID de la URL de forma dinámica
+        var url = window.location.href;
+        var parts = url.split('/');
+        var id = parts[parts.length - 2]
+
+        if(!isNaN(id)){ // Verificar si la id es un numero
+            // Construir la URL del endpoint de API con la id dinamica
+            let apiURL = 'http://127.0.0.1:8000/cliente-api/asesoria/detail/' + id + '/';
+               
+            $.ajax({
+                url: apiURL,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data){
+                    $('#id').text('Número de solicitud: ' + data.id);
+                    $('#fecha-inicio').text('Fecha Inicio: ' + data.fecha_creacion);
+                    
+                    if(data.fecha_termino == null){
+                        $('#fecha-termino').text('Fecha Término: Sin Asignar');
+                    } 
+                    else{
+                        $('#fecha-termino').text('Fecha Término: ' + data.fecha_termino);
+                    }
+                    
+                    $('#tipo-asesoria').text('Tipo de Asesoría: ' + data.tipo_asesoria);
+                    $('#estado-asesoria').text('Estado: ' + data.estado_asesoria);
+                    
+                    if(data.fkProfesional == null){
+                        $('#profesional').text('Profesional: Sin Asignar');
+                    } 
+                    else{
+                        $('#profesional').text('Profesional: ' + data.fkProfesional);
+                    }
+
+                    $('#nombre-fiscalizador').text('Nombre Fiscalizador: ' + data.nombre_fiscalizador);
+                    $('#numero-fiscalizador').text('Número de teléfono: ' + data.numero_fiscalizador);
+                    $('#email-fiscalizador').text('Correo electrónico: ' + data.email);
+                },
+                error: function(error){
+                    console.log('Error al cargar el detalle de la asesoria ');
+                }
+            });
+        } else {
+            console.log('id no valida');
+        };
+    };
+
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== "") {
@@ -166,4 +213,5 @@ $(document).ready(function(){
     };
 
     buildList();
+    buildDetail();
 });

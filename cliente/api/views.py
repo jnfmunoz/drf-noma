@@ -3,6 +3,7 @@ from rest_framework import mixins, generics
 from rest_framework.permissions import IsAuthenticated
 
 from .serializers import ListAsesoriaSerializer, CreateAsesoriaSerializer, DetailAsesoriaSerializer
+from .permissions import OwnerDetail
 
 class AsesoriaListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
@@ -33,6 +34,7 @@ class AsesoriaDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
 
     queryset = Asesoria.objects.all()
     serializer_class = DetailAsesoriaSerializer
+    permission_classes = [OwnerDetail]
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
