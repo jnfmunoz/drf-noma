@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+{% load static %}
+{% block bootstrap5_title %}No More Accidents{% endblock %}
+
+{% block content %}
+  <br>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-12" id="title-container" style="text-align:center">
+        <h3>Registro de accidentes</h3>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container col-md-4" style="text-align: center;">
+    <form action="new" method="post" id="accidenteForm">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Fecha de Accidente *</label>
+        <br>
+        <br>
+        <div class="input-group">
+          <input id="fecha_accidente" type="date" class="form-control">
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Cantidad de Involucrados *</label>
+        <br>
+        <br>
+        <div class="input-group">
+          <input id="cantidad_involucrados" type="number" class="form-control">
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Informe situación *</label>
+      <br>
+      <br>
+      <div class="input-group">
+        <textarea id="descripcion" class="form-control" name="descripcion"></textarea>
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <select id="comboTipoAccidente" style="text-align: center;" name="tipo_accidente" onchange="combo(this, 'tipoaccidente')" class="form-control">
+        {% comment %} Por caída, Por exposición o contacto, Por sobreesfuerzo o golpes, Por movimientos repetitivos {% endcomment %}
+        <option value="1">Por caída</option>
+        <option value="2">Por exposición o contacto</option>
+        <option value="3">Por sobreesfuerzo o golpes</option>
+        <option value="4">Por movimientos repetitivos</option>
+      </select>
+    </div>
+    <br>    
+    <br>
+    <div class="text-center">
+      <button type="button" id="btnNewAccidente" class="btn btn-outline-primary btn-primary text-light mt-3"><img src="{% static 'core/img/icons/upload.png' %}" alt="" width="25px" height="25px">Nuevo Accidente</button>
+      <button type="reset" class="btn btn-outline-secondary btn-secondary text-light mt-3"><img src="{% static 'core/img/icons/clean.png' %}" alt="" width="25px" height="25px"> Restablecer</button>
+    </div>
+  </form>
+  </div>
+  <br>
+  <br>
+  <div class="container col-md-8">
+    <br><br><br>
+    <div class="row">
+      <div class="container col-md-4" style="text-align: left;">
+        <a href="#" class="btn btn-secondary col-md-8"><img src="{% static 'core/img/icons/previous.png' %}" alt="" width="38px" height="38px">Volver</a>
+      </div>
+      <!-- <div class="container col-md-4" style="text-align: center;">
+        <a href="update-asesoria.html" class="btn btn-warning col-md-12"><img src="../../assets/img/icons/edit.png" alt="">Editar Solicitud</a>
+      </div> -->
+      <div class="container col-md-4">
+        <!-- <button>Editar</button> -->
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script type="text/javascript" src="{% static 'core/js/cliente/accidente.js' %}"></script>
+{% endblock content %}

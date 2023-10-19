@@ -2,23 +2,24 @@
 
 {% load bootstrap5 %}
 {% load static %}
-{% block bootstrap5_title %}No More Accidents{% endblock %}
+{% block bootstrap5_title %}No More Accidents | Accidentes{% endblock %}
 
 {% block content %}
-
-    <br><br>
+  <div class="bg-white">
+    <br>
+    <br>
     <div class="container" style="text-align:center">
       <div class="row">
-          <div class="col-12" id="title-container">
-            <h3>Mis Asesorías</h3>
-          </div>
+        <div class="row align-items-center" style="text-align: center;">
+          <h3>Registro de Accidentes</h3>
+        </div>
       </div>
     </div>
     <br>    
     <div class="container" style="text-align:center;">      
       <div class="row">
         <div class="col-12">
-          <a href="{% url 'asesoria-new' %}" class="btn btn-primary col-md-4"><img src="../../assets/img/icons/new-asesoria.png" alt="">Nueva Asesoría</a>
+          <a href="{% url 'accidente-new' %}" class="btn btn-primary col-md-4">Registrar Accidente</a>
         </div>
       </div>
       <br>
@@ -26,22 +27,23 @@
     </div>
     <br>
     <br>
+
     <div class="container col-12" style="text-align: center;">
       <div class="table table-sm">
       <form method="GET">
-          <table class="table table-secondary table-bordered table-striped">
+        <table class="table table-secondary table-bordered table-striped">
             <thead>
               <div class="row">
                 <div class="col-12 col-md-4 padding-our">
-                  <label for="fechainicio">Fecha inicio</label>
+                  <label for="fechainicio">Fecha Accidente</label>
                     <div class="input-group">
                       <input type="date" id="fechainicio" name="fechainicio" class="form-control">
                     </div>
                   </div>
                   <div class="col-12 col-md-4 padding-our">
-                    <label for="fechatermino">Fecha termino</label>
+                    <label for="fechatermino">Tipo Accidente</label>
                     <div class="input-group">
-                      <input type="date" id="fechatermino" name="fechatermino" class="form-control">
+                      <input type="text" id="fechatermino" name="fechatermino" class="form-control">
                     </div>
                   </div>
                   <div class="col-12 col-md-4 padding-our">
@@ -52,35 +54,30 @@
               </div>
               <br>
               <tr class="col-12">
-                <th class="col-2">Fecha inicio</th>
-                <th class="col-2">Fecha termino</th>
-                <th class="col-2">Tipo asesoría</th>
-                <th class="col-2">Estado</th>
+                <th class="col-2">Fecha Accidente</th>
+                <th class="col-2">Descripción</th>
+                <th class="col-2">Cant. Involucrados</th>
+                <th class="col-2">Última Actualización</th>
                 <th class="col-4">Acciones</th>                
               </tr>
             </thead>          
             <tbody class="col-12" id="tbody-list">
+              {% comment %} 
               <tr class="col-12">
-                {% comment %} <td>11-09-2023</td>
-                <td>20-09-2023</td>
-                <td>Fiscalización</td>
-                <td>En Curso</td>
+                <td>12-09-2023</td>
+                <td>Caída de alturasdasasda</td>
+                <td>1</td>
+                <td>12-09-2023</td>
                 <td>
-                  <a href="#" class="btn btn-outline-warning btn-warning text-dark"><img src="{% static 'core/img/icons/edit.png' %}" alt="" width="20px" height="20px">Actualizar</a>
-                  <a href="#" class="btn btn-outline-info btn-info text-dark"><img src="{% static 'core/img/icons/detail.png' %}" alt="" width="20px" height="20px">Ver Más</a>                          
-                </td> {% endcomment %}
-              </tr>
+                  <a href="{% url 'update_accidente' %}" class="btn btn-outline-warning btn-warning text-dark"><img src="{% static 'core/img/icons/edit.png' %}" alt="" width="20px" height="20px">Actualizar</a>
+                  <a href="{% url 'detail_accidente' %}" class="btn btn-outline-info btn-info text-dark"><img src="{% static 'core/img/icons/detail.png' %}" alt="" width="20px" height="20px">Ver Más</a>                  
+                </td>
+              </tr> 
+              {% endcomment %}
             </tbody>
         </table>
-      </form>
       </div>
     </div>
-    <br>
-    <br>
-
-    {% comment %} <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> {% endcomment %}
-    {% comment %} <script type="text/javascript" src="{% static 'core/js/cliente.js' %}"></script> {% endcomment %}
-
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script type="text/javascript" src="{% static 'core/js/cliente/asesoria.js' %}"></script>
-{% endblock content %}
+    <script type="text/javascript" src="{% static 'core/js/cliente/accidente.js' %}"></script>
+{% endblock %}

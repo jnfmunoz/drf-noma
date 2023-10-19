@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     function buildList() {
-        // const url = 'http://127.0.0.1:8000/cliente-api/list-asesoria-cliente-api/';
+
         const url = 'http://127.0.0.1:8000/cliente-api/asesoria/list/'
 
         fetch(url)
@@ -11,15 +11,16 @@ $(document).ready(function(){
                 let asesoriaList = '';
                 for(let index = 0; index < data.length; index++){
                     const asesoria = data[index];
+                    const fechaTermino = asesoria.fecha_termino === null ? "Sin Asignar" : asesoria.fecha_termino;
 
                     asesoriaList = asesoriaList +   `<tr class="col-12">
-                                                        <td class="col-2"></td>
-                                                        <td class="col-2">${asesoria.fecha_termino}</td>
+                                                        <td class="col-2">${asesoria.fecha_creacion}</td>
+                                                        <td class="col-2">${fechaTermino}</td>
                                                         <td class="col-2">${asesoria.tipo_asesoria}</td>
                                                         <td class="col-2">${asesoria.estado_asesoria}</td>
                                                         <td class="col-3">
-                                                            <a href="" class="btn btn-warning btn-sm">Update</a>                                                        
-                                                            <a href="/cliente/asesoria/detail/${asesoria.id}" class="btn btn-info btn-sm">Ver Más</a>
+                                                            <a href="/cliente/asesoria/update/${asesoria.id}/" class="btn btn-outline-warning btn-warning text-dark">Actualizar</a>                                                        
+                                                            <a href="/cliente/asesoria/detail/${asesoria.id}/" class="btn btn-outline-info btn-info text-dark">Ver Más</a>
                                                         </td>                                                        
                                                     </tr>`
                 };
@@ -51,8 +52,48 @@ $(document).ready(function(){
 
         // URL de la API a la que deseas hacer la solicitud POST
         let url = 'http://127.0.0.1:8000/cliente-api/asesoria/new/'
-        
-        
+                
+        //Mostrar un cuadro de diálogo de confirmación
+        Swal.fire({
+            title: "Nueva Asesoría",
+            text: "¿Deseas enviar una nueva solicitud?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, enviar",
+            cancelButtonText: "Cancelar"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // El usuario hizo clic en "Aceptar", enviar la solicitud POST aquí
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: JSON.stringify(dataToSend),
+                    contentType: "application/json",
+                    beforeSend: function(xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+                    },
+                    success: function(response) {
+                        console.log("Respuesta:", response);
+                    },
+                    error: function(error) {
+                        console.error("Error:", error);
+                    }
+                })
+                .done(function(response) {
+                    // La solicitud POST se completó con éxito
+                    Swal.fire("¡Éxito!", "Solicitud POST exitosa: " + response, "success");
+                    
+                    // Redirigir a la página de listado (reemplaza con la URL deseada)
+                    window.location.href = "/cliente/asesoria/list/";
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                    // La solicitud POST falló
+                    Swal.fire("Error", "Error en la solicitud POST: " + textStatus, "error");
+                    });
+                }
+            });
         // Realiza la solicitud POST
         // $.ajax({
         //     type: "POST",
@@ -105,48 +146,6 @@ $(document).ready(function(){
         //     // El usuario hizo clic en "Cancelar", no se envía la solicitud POST
         //     alert("Solicitud POST cancelada.");
         // }
-
-        //Mostrar un cuadro de diálogo de confirmación
-        Swal.fire({
-            title: "Nueva Asesoría",
-            text: "¿Deseas enviar una nueva solicitud?",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sí, enviar",
-            cancelButtonText: "Cancelar"
-          }).then((result) => {
-            if (result.isConfirmed) {
-              // El usuario hizo clic en "Aceptar", enviar la solicitud POST aquí
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: JSON.stringify(dataToSend),
-                contentType: "application/json",
-                beforeSend: function(xhr, settings) {
-                    xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
-                },
-                success: function(response) {
-                    console.log("Respuesta:", response);
-                },
-                error: function(error) {
-                    console.error("Error:", error);
-                }
-            })
-            .done(function(response) {
-                // La solicitud POST se completó con éxito
-                Swal.fire("¡Éxito!", "Solicitud POST exitosa: " + response, "success");
-                
-                // Redirigir a la página de listado (reemplaza con la URL deseada)
-                window.location.href = "/cliente/asesoria/list/";
-              })
-              .fail(function(jqXHR, textStatus, errorThrown) {
-                // La solicitud POST falló
-                Swal.fire("Error", "Error en la solicitud POST: " + textStatus, "error");
-              });
-            }
-          });
     });
 
     function buildDetail(){
@@ -164,9 +163,10 @@ $(document).ready(function(){
                 type: 'GET',
                 dataType: 'json',
                 success: function(data){
-                    $('#id').text('Número de solicitud: ' + data.id);
+                    $('#id').text('N° Solicitud: ' + data.id);
                     $('#fecha-inicio').text('Fecha Inicio: ' + data.fecha_creacion);
-                    
+                    $('#descripcion').text('Informe situación: ' + data.descripcion);
+
                     if(data.fecha_termino == null){
                         $('#fecha-termino').text('Fecha Término: Sin Asignar');
                     } 
@@ -174,8 +174,31 @@ $(document).ready(function(){
                         $('#fecha-termino').text('Fecha Término: ' + data.fecha_termino);
                     }
                     
-                    $('#tipo-asesoria').text('Tipo de Asesoría: ' + data.tipo_asesoria);
-                    $('#estado-asesoria').text('Estado: ' + data.estado_asesoria);
+                    if(data.tipo_asesoria === 1){
+                        $('#tipo-asesoria').text('Tipo de Asesoría: Accidente');                        
+                    }
+                    else if(data.tipo_asesoria === 2) {
+                        $('#tipo-asesoria').text('Tipo de Asesoría: Fiscalización');
+                    }
+                    else{
+                        $('#tipo-asesoria').text('Tipo de Asesoría: Desconocido');
+                    }
+
+                    if(data.estado_asesoria === 1){
+                        $('#estado-asesoria').text('Estado: Ingresada');
+                    }
+                    else if(data.estado_asesoria === 2){
+                        $('#estado-asesoria').text('Estado: En Curso');
+                    }
+                    else if(data.estado_asesoria === 3){
+                        $('#estado-asesoria').text('Estado: Finalizada');
+                    }
+                    else if(data.estado_asesoria === 4){    
+                        $('#estado-asesoria').text('Estado: Aprobada');
+                    }
+                    else if(data.estado_asesoria === 5){
+                        $('#estado-asesoria').text('Estado: Rechazada');
+                    }                    
                     
                     if(data.fkProfesional == null){
                         $('#profesional').text('Profesional: Sin Asignar');
@@ -188,14 +211,117 @@ $(document).ready(function(){
                     $('#numero-fiscalizador').text('Número de teléfono: ' + data.numero_fiscalizador);
                     $('#email-fiscalizador').text('Correo electrónico: ' + data.email);
                 },
-                error: function(error){
-                    console.log('Error al cargar el detalle de la asesoria ');
+                // error: function(error){
+                //     console.log('Error al cargar el detalle de la asesoria ');
+                // }
+            });
+        } 
+        // else {
+        //     console.log('id no valida');
+        // };
+    };
+
+    function buildUpdate(){
+        // Extraer la ID de la URL de forma dinámica
+        var url = window.location.href;
+        var parts = url.split('/');
+        var id = parts[parts.length - 2]
+        
+        // Realiza una solicitud GET para cargar los datos de la solicitud de asesoría
+        // Construir la URL del endpoint de API con la id dinamica
+        let apiURL = 'http://127.0.0.1:8000/cliente-api/asesoria/update/' + id + '/';
+            
+        $.ajax({
+            url: apiURL,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){            
+                
+                // Rellena los campos del formulario con los datos obtenidos
+                $('#id_update').text('N° Solicitud: ' + data.id);
+                $('#comboTipoAsesoria_update').val(data.tipo_asesoria);
+                $('#descripcion_update').text(data.descripcion);
+                $('#nombre_fiscalizador_update').val(data.nombre_fiscalizador);
+                $('#numero_fiscalizador_update').val(data.numero_fiscalizador);
+                $('#email_update').val(data.email);
+            },
+            // error: function(error){
+            //     console.log('Error al cargar el detalle de la asesoria ');
+            // }
+        });
+
+        // Maneja el envío del formulario
+        $('#asesoriaFormUpdate').submit(function(event){
+            event.preventDefault(); // Evita que el formulario se envía de forma predeterminada
+
+            // obtener los datos del formulario
+            var formData = {
+                descripcion: $('#descripcion_update').val() ,
+                nombre_fiscalizador: $('#nombre_fiscalizador_update').val(),
+                numero_fiscalizador: $('#numero_fiscalizador_update').val(),
+                email: $('#email_update').val(),
+                tipo_asesoria: $('#comboTipoAsesoria_update').val()
+            }
+            
+            //Mostrar un cuadro de diálogo de confirmación
+            Swal.fire({
+                title: "Actualizar solicitud Asesoría",
+                text: "¿Deseas actualizar la solicitud?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, enviar",
+                cancelButtonText: "Cancelar"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    // El usuario hizo clic en "Aceptar", enviar la solicitud PUT aquí
+                $.ajax({
+                    type: 'PUT',
+                    url: apiURL,
+                    data: JSON.stringify(formData),
+                    contentType: "application/json",
+                    beforeSend: function(xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+                    },
+                    success: function(response) {
+                        console.log("Respuesta:", response);
+                    },
+                    error: function(error) {
+                        console.error("Error:", error);
+                    }
+                })
+                .done(function(response){
+                        // La solicitud PUT se completó con éxito
+                        Swal.fire({
+                            icon: "success",
+                            title: "¡Éxito!",
+                            text: "Actualización de solicitud exitosa",
+                            showConfirmButton: false,
+                            timer: 2000,                                                                    
+                        });
+                        // "¡Éxito!", "Solicitud PUT exitosa: " + response, "success"
+                        // Establece un temporizador para redirigir después de 2 segundos (2000 ms)
+                        setTimeout(function() {
+                            // Redirigir a la página de listado (reemplaza con la URL deseada)
+                            window.location.href = "/cliente/asesoria/list/";
+                        }, 2050);
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        // La solicitud POST falló
+                        Swal.fire({
+                            icon: "error",
+                            title: "Ops!",
+                            text: "Error en la actualización de solicitud",
+                            showConfirmButton: false,
+                            timer: 2000,     
+                        });
+                        //"Error en la actualización de solicitud");
+                    });
                 }
             });
-        } else {
-            console.log('id no valida');
-        };
-    };
+        });     
+    }
 
     function getCookie(name) {
         var cookieValue = null;
@@ -214,4 +340,5 @@ $(document).ready(function(){
 
     buildList();
     buildDetail();
+    buildUpdate();
 });

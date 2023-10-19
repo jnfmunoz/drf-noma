@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+{% load static %}
+{% block bootstrap5_title %}No More Accidents{% endblock %}
+
+{% block content %}
+  <br>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-12" id="title-container" style="text-align:center">
+        <h3>Modificar accidente</h3>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container col-md-4" style="text-align: center;">
+    <form action="new" method="post">
+    <!-- <div class="form-group">
+      <label>Tipo Asesoría *</label>
+      <br>
+      <br>
+      <div class="form-group">
+        <select style="text-align: center;" name="asesorialist" onchange="combo(this, 'tipoasesoria')" class="form-control">
+          <option value="">Accidente</option>
+          <option value="">Fiscalización</option>
+        </select>
+      </div>
+      <ul class="errorlist">
+          <li>El email no es correcto.</li>
+      </ul>
+    </div> -->
+    <br>
+    <div class="form-group">
+      <label>Informe situación *</label>
+      <br>
+      <br>
+      <div class="input-group">
+        <textarea class="form-control"></textarea>
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Cantidad de Involucrados *</label>
+        <br>
+        <br>
+        <div class="input-group">
+          <input type="number" class="form-control">
+        </div>
+    </div>
+    <!-- <br>
+      <h3>Contacto Fiscalizador</h3>
+      <hr>
+      <div class="form-group">
+        <label>Nombre Fiscalizador *</label>
+        <br>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control">
+        </div>
+      </div>
+      <br>
+      <div class="form-group">
+        <label>Número de teléfono *</label>
+        <br>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control">
+        </div>
+      </div>
+      <br>
+      <div class="form-group">
+        <label>Correo electrónico *</label>
+        <br>
+        <br>
+        <div class="input-group">
+          <input type="text" class="form-control">
+        </div>
+      </div> -->
+      <br>
+      <div class="text-center">
+        <button type="submit" class="btn btn-outline-primary btn-primary text-light mt-3"><img src="{% static 'core/img/icons/upload.png' %}" alt="" width="25px" height="25px">Registrar Accidente</button>
+        <button type="reset" class="btn btn-outline-secondary btn-secondary text-light mt-3"><img src="{% static 'core/img/icons/clean.png' %}" alt="" width="25px" height="25px"> Restablecer</button>
+      </div>
+  </form>
+  </div>
+  <br>
+  <br>
+  <div class="container col-md-8">
+    <br><br><br>
+    <div class="row">
+      <div class="container col-md-4" style="text-align: left;">
+        <a href="{% url 'accidentes' %}" class="btn btn-secondary col-md-8"><img src="{% static 'core/img/icons/previous.png' %}" alt="" width="38px" height="38px">Volver</a>
+      </div>
+      <!-- <div class="container col-md-4" style="text-align: center;">
+        <a href="update-asesoria.html" class="btn btn-warning col-md-12"><img src="../../assets/img/icons/edit.png" alt="">Editar Solicitud</a>
+      </div> -->
+      <div class="container col-md-4">
+        <!-- <button>Editar</button> -->
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+{% endblock %}

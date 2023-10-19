@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+{% load static %}
+{% block bootstrap5_title %}No More Accidents{% endblock %}
+
+{% block content %}
+  <br>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-12" id="title-container" style="text-align:center">
+        <h3>Actualizar solicitud Asesoría</h3>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container col-md-4" style="text-align: center;">
+    <form action="update" method="put" id="asesoriaFormUpdate">
+      {% csrf_token %}
+      <div class="form-group">
+        <h3 id="id_update"></h3>
+        <br>
+        <label>Tipo Asesoría *</label>
+        <br>
+        <br>
+        <div class="form-group">
+          <select id="comboTipoAsesoria_update" style="text-align: center;" name="tipo_asesoria" onchange="combo(this, 'tipoasesoria')" class="form-control">
+            <option value="1">Accidente</option>
+            <option value="2">Fiscalización</option>
+          </select>
+        </div>
+        <!-- <ul class="errorlist">
+            <li>El email no es correcto.</li>
+        </ul> -->
+      </div>
+      <br>
+      <div class="form-group">
+        <label>Informe situación *</label>
+        <br>
+        <br>
+        <div class="input-group">
+          <textarea id="descripcion_update" class="form-control" name="descripcion"></textarea>
+        </div>
+      </div>
+      <br>
+        <h3>Contacto Fiscalizador</h3>
+        <hr>
+        <div class="form-group">
+          <label>Nombre Fiscalizador *</label>
+          <br>
+          <br>
+          <div class="input-group">
+            <input id="nombre_fiscalizador_update" type="text" class="form-control" name="nombre_fiscalizador">
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <label>Número de teléfono *</label>
+          <br>
+          <br>
+          <div class="input-group">
+            <input id="numero_fiscalizador_update" type="text" class="form-control" name="numero_fiscalizador">
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <label>Correo electrónico *</label>
+          <br>
+          <br>
+          <div class="input-group">
+            <input id="email_update" type="text" class="form-control" name="email">
+          </div>
+        </div>
+        <br>
+        <div class="text-center">
+          <button type="submit" id="btnUpdateAsesoria" class="btn btn-outline-primary btn-primary text-light mt-3"><img src="{% static 'core/img/icons/upload.png' %}" alt="" width="25px" height="25px">Actualizar Solicitud</button>
+          <button type="reset" class="btn btn-outline-secondary btn-secondary text-light mt-3"><img src="{% static 'core/img/icons/clean.png' %}" alt="" width="25px" height="25px"> Restablecer</button>
+        </div>
+    </form>
+  </div>
+  <br>
+  <br>
+  <div class="container col-md-8">
+    <br><br><br>
+    <div class="row">
+      <div class="container col-md-4" style="text-align: left;">
+        <a href="" class="btn btn-secondary col-md-8"><img src="{% static 'core/img/icons/previous.png' %}" alt="" width="38px" height="38px">Volver</a>
+      </div>
+      <!-- <div class="container col-md-4" style="text-align: center;">
+        <a href="update-asesoria.html" class="btn btn-warning col-md-12"><img src="../../assets/img/icons/edit.png" alt="">Editar Solicitud</a>
+      </div> -->
+      <div class="container col-md-4">
+        <!-- <button>Editar</button> -->
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script type="text/javascript" src="{% static 'core/js/cliente/asesoria.js' %}"></script>
+{% endblock %}

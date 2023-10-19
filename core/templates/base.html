@@ -30,7 +30,7 @@
             {% comment %} {% endif %} {% endcomment %}
             {% comment %} {% if perms.asesora.add_accidente %} {% endcomment %}
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#" style="color:#fff;">Accidentes</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'accidente-list' %}" style="color:#fff;">Accidentes</a>
                 </li>
             {% comment %} {% endif %} {% endcomment %}
             {% comment %} {% if perms.asesora.view_visita %} {% endcomment %}

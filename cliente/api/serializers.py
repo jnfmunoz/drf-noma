@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from asesora.models import Asesoria
+from asesora.models import Asesoria, Accidente
 
 class ListAsesoriaSerializer(serializers.ModelSerializer):
 
@@ -11,18 +11,17 @@ class ListAsesoriaSerializer(serializers.ModelSerializer):
         model = Asesoria
         fields = '__all__'
 
-class CreateAsesoriaSerializer(serializers.ModelSerializer):
+class UpdateCreateAsesoriaSerializer(serializers.ModelSerializer):
 
     fkCliente = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Asesoria
         # fields = '__all__'
-        exclude = ['fecha_termino', 'estado_asesoria', 'fkProfesional']
+        exclude = ['fecha_creacion','fecha_termino', 'estado_asesoria', 'fkProfesional']
         estado_asesoria = serializers.CharField(source='estado_asesoria.descripcion')
         tipo_asesoria = serializers.CharField(source='tipo_asesoria.descripcion')
         
-
     def create(self, validated_data):
         return Asesoria.objects.create(**validated_data)
     
@@ -32,4 +31,26 @@ class DetailAsesoriaSerializer(serializers.ModelSerializer):
         model = Asesoria
         exclude = ['fkCliente']
 
+class ListAccidenteSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Accidente
+        fields = '__all__'
+
+class UpdateCreateAccidenteSerializer(serializers.ModelSerializer):
+
+    fkCliente = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Accidente
+        fields = '__all__'
+        tipo_accidente = serializers.CharField(source='tipo_accidente.descripcion')
+
+    def create(self, validated_data):
+        return Accidente.objects.create(**validated_data)
+
+class DetailAccidenteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Accidente
+        exclude = ['fkCliente']
