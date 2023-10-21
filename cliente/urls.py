@@ -12,4 +12,7 @@ urlpatterns = [
     path('accidente/list/', views.list_accidente, name='accidente-list'),
     path('accidente/new/', views.new_accidente, name='accidente-new'),
     path('accidente/detail/<int:pk>/', views.detail_accidente, name='accidente-detail'),
+    path('accidente/update/<int:pk>/', views.update_accidente, name='asesoria-update'),
+
+    
 ]

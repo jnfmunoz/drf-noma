@@ -32,3 +32,9 @@ def detail_accidente(request, pk):
     context = {'accidente':accidente}
 
     return render(request, 'cliente/accidente/detail-accidente.html', context)
+
+def update_accidente(request, pk):
+    accidente = Accidente.objects.get(pk=pk)
+    context = {'accidente':accidente}
+
+    return render(request, 'cliente/accidente/update-accidente.html', context)

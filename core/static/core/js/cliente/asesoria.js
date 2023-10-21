@@ -276,52 +276,52 @@ $(document).ready(function(){
                 }).then((result) => {
                 if (result.isConfirmed) {
                     // El usuario hizo clic en "Aceptar", enviar la solicitud PUT aquí
-                $.ajax({
-                    type: 'PUT',
-                    url: apiURL,
-                    data: JSON.stringify(formData),
-                    contentType: "application/json",
-                    beforeSend: function(xhr, settings) {
-                        xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
-                    },
-                    success: function(response) {
-                        console.log("Respuesta:", response);
-                    },
-                    error: function(error) {
-                        console.error("Error:", error);
-                    }
+                    $.ajax({
+                        type: 'PUT',
+                        url: apiURL,
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        beforeSend: function(xhr, settings) {
+                            xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+                        },
+                        success: function(response) {
+                            console.log("Respuesta:", response);
+                        },
+                        error: function(error) {
+                            console.error("Error:", error);
+                        }
                 })
                 .done(function(response){
-                        // La solicitud PUT se completó con éxito
-                        Swal.fire({
-                            icon: "success",
-                            title: "¡Éxito!",
-                            text: "Actualización de solicitud exitosa",
-                            showConfirmButton: false,
-                            timer: 2000,                                                                    
-                        });
-                        // "¡Éxito!", "Solicitud PUT exitosa: " + response, "success"
-                        // Establece un temporizador para redirigir después de 2 segundos (2000 ms)
-                        setTimeout(function() {
-                            // Redirigir a la página de listado (reemplaza con la URL deseada)
-                            window.location.href = "/cliente/asesoria/list/";
-                        }, 2050);
-                    })
-                    .fail(function(jqXHR, textStatus, errorThrown) {
-                        // La solicitud POST falló
-                        Swal.fire({
-                            icon: "error",
-                            title: "Ops!",
-                            text: "Error en la actualización de solicitud",
-                            showConfirmButton: false,
-                            timer: 2000,     
-                        });
-                        //"Error en la actualización de solicitud");
+                    // La solicitud PUT se completó con éxito
+                    Swal.fire({
+                        icon: "success",
+                        title: "¡Éxito!",
+                        text: "Actualización de solicitud exitosa",
+                        showConfirmButton: false,
+                        timer: 2000,                                                                    
                     });
+                    // "¡Éxito!", "Solicitud PUT exitosa: " + response, "success"
+                    // Establece un temporizador para redirigir después de 2 segundos (2000 ms)
+                    setTimeout(function() {
+                        // Redirigir a la página de listado (reemplaza con la URL deseada)
+                        window.location.href = "/cliente/asesoria/list/";
+                    }, 2050);
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    // La solicitud POST falló
+                    Swal.fire({
+                        icon: "error",
+                        title: "Ops!",
+                        text: "Error en la actualización de solicitud",
+                        showConfirmButton: false,
+                        timer: 2000,     
+                    });
+                    //"Error en la actualización de solicitud");
+                });
                 }
             });
         });     
-    }
+    };
 
     function getCookie(name) {
         var cookieValue = null;

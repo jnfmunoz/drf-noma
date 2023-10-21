@@ -33,10 +33,10 @@ $(document).ready(function(){
                                                             <td>${accidente.cantidad_involucrados}</td>
                                                             <td>${tipoAccidente}</td>
                                                             <td>                                                                
-                                                                <a href="" class="btn btn-outline-warning btn-warning text-dark">Actualizar</a>
+                                                                <a href="/cliente/accidente/update/${accidente.id}/" class="btn btn-outline-warning btn-warning text-dark">Actualizar</a>
                                                                 <a href="/cliente/accidente/detail/${accidente.id}/" class="btn btn-outline-info btn-info text-dark">Ver Más</a>                  
                                                             </td>
-                                                        </tr>`
+                                                        </tr>`;
                 };
             list.empty();
             list.append(accidenteList);
@@ -124,7 +124,91 @@ $(document).ready(function(){
                 $('#tipo-accidente').text('Tipo Accidente: '+ data.tipo_accidente);
             },
         })
-    }
+    };
+
+    function buildUpdate(){
+        let url = window.location.href;
+        let parts = url.split('/');
+        let id = parts[parts.length -2]
+
+        let apiURL = 'http://127.0.0.1:8000/cliente-api/accidente/update/' + id + '/';
+
+        $.ajax({
+            url: apiURL,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+
+                $('#id_update').text('N° Accidente: ' + data.id);
+                $('#fecha_accidente_update').val(data.fecha_accidente);
+                $('#cantidad_involucrados_update').val(data.cantidad_involucrados);
+                $('#descripcion_update').text(data.descripcion);
+                $('#comboTipoAccidente_update').val(data.tipo_accidente);
+            },
+        });
+
+        $('#accidenteFormUpdate').submit(function(event) {
+            event.preventDefault();
+
+            let formData = {
+                fecha_accidente: $('#fecha_accidente_update').val(),
+                cantidad_involucrados: $('#cantidad_involucrados_update').val(),
+                descripcion : $('#descripcion_update').val(),
+                tipo_accidente : $('#comboTipoAccidente_update').val(),
+            }
+            
+            Swal.fire({
+                title: "Actualizar Accidente",
+                text: "¿Deseas actualizar registro de accidente?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, enviar",
+                cancelButtonText: "Cancelar"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'PUT',
+                        url: apiURL,
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        beforeSend: function(xhr, settings) {
+                            xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+                        },
+                        success: function(response) {
+                            // console.log("Respuesta:", response);
+                            console.log("Éxito");
+                        },
+                        error: function(error) {
+                            console.error("Error:", error);
+                        }
+                    })
+                    .done(function(response){                                    
+                        Swal.fire({
+                            icon: "success",
+                            title: "¡Éxito!",
+                            text: "Modificación de accidente exitosa",
+                            showConfirmButton: false,
+                            timer: 2000,                                                                    
+                            });                            
+                            setTimeout(function() {                                
+                                window.location.href = "/cliente/accidente/list/";
+                            }, 2050);
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Ops!",
+                            text: "Error en la actualización de solicitud",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                    });
+                }
+            });
+        });
+    };
 
     function getCookie(name) {
         var cookieValue = null;
@@ -143,4 +227,5 @@ $(document).ready(function(){
 
     buildList();
     buildDetail();
+    buildUpdate();
 });
