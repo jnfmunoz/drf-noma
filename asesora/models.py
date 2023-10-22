@@ -125,6 +125,7 @@ class Cliente(models.Model):
     direccion = models.CharField(max_length=200)
     fkComuna = models.ForeignKey(Comuna, on_delete=models.PROTECT, verbose_name='Comuna')
     fkEstadoServicio = models.ForeignKey(EstadoServicio, on_delete=models.PROTECT, verbose_name="EstadoServicio")
+    fkTipoEmpresa = models.ForeignKey(TipoEmpresa, on_delete=models.PROTECT, verbose_name='TipoEmpresa', related_name='tipo_empresa')
     fkUser = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Usuario', related_name='client_user')
     
     def __str__(self) -> str:
@@ -189,7 +190,7 @@ class Capacitacion(models.Model):
 class Contrato(models.Model):
 
     fecha_inicio = models.DateField(auto_now_add=True)
-    fecha_termino = models.DateField()
+    fecha_termino = models.DateField(null=True, blank=True)
     descripcion = models.CharField(max_length=200)
     costo_mensual = models.IntegerField()
     costo_modificacion_formulario = models.IntegerField()
@@ -225,10 +226,10 @@ class FormularioVisita(models.Model):
 
 class Visita(models.Model):
 
-    # fkCliente = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='cliente')
+    fkCliente = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='cliente_vista', default=None, null=True, blank=True)
     fkProfesional = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profesional_visita', default=None, null=True, blank=True)
     fecha_inicio = models.DateField()
-    fecha_termino = models.DateField()
+    fecha_termino = models.DateField(null=True, blank=True)
     direccion = models.CharField(max_length=200)
     descripcion = models.CharField(max_length=200, null=True, blank=True)
     fkComuna = models.ForeignKey(Comuna, on_delete=models.PROTECT, verbose_name='Comuna')
