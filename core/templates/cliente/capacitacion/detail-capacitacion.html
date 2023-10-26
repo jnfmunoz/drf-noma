@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+{% load static %}
+{% block bootstrap5_title %}No More Accidents{% endblock %}
+
+{% block content %}
+        <br>
+    <br>
+    <div class="container">
+      <div class="row">
+          <div class="col-12" id="title-container" style="text-align:center">
+            <h3>Detalle Capacitación</h3>
+          </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="container col-md-8" style="text-align: left;">
+        <h3 id="id" style="text-align: center;"></h3>
+        <hr>
+        <h5 id="descripcion"></h5>
+        <h5 id="fecha-capacitacion"></h5>
+        <h5 id="profesional"></h5>
+        <h5 id="direccion"></h5>
+        <h5 id="comuna"></h5>
+        <h5 id="estado-capacitacion"></h5>
+        <h5 id="cant-asistente"></h5>
+        <div id="lista-asist"></div>
+    </div>
+    <br>
+    <br>
+    <div class="container col-md-8">
+      <br><br><br>
+      <div class="row">
+        <div class="container col-md-4" style="text-align: left;">
+          <a href="" class="btn btn-secondary col-md-8"><img src="{% static 'core/img/icons/previous.png' %}" alt="" width="38px" height="38px">Volver</a>
+        </div>
+        {% comment %} <div class="container col-md-4" style="text-align: center;">
+          <a href="update-capacitacion.html" class="btn btn-warning col-md-12"><img src="../../assets/img/icons/edit.png" alt="" width="38px" height="38px">Modificar Información</a>
+        </div> {% endcomment %}
+        <div class="container col-md-4">
+          <!-- <button>Editar</button> -->
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'core/js/cliente/capacitacion.js' %}"></script>
+{% endblock %}

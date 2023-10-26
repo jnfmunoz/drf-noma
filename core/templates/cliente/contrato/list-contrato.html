@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+{% load static %}
+{% block bootstrap5_title %}No More Accidents{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <div class="container" style="text-align:center">
+      <div class="row">
+          <div class="col-12" id="title-container">
+            <h3>Contrato</h3>
+          </div>
+      </div>
+    </div>
+    <br>
+    <div class="container col-12" style="text-align: center;">
+      <div class="table table-sm">
+      <form method="GET">
+          <table class="table table-secondary table-bordered table-striped">
+            <thead>
+              <tr class="col-12">
+                <th class="col-1">id</th>                               
+                <th class="col-1">Fecha contrato</th>                               
+                <th class="col-1">Acciones</th>                               
+              </tr>
+            </thead>          
+            <tbody class="col-12" id="tbody-list">
+            
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'core/js/cliente/contrato.js' %}"></script>
+{% endblock %}

@@ -27,6 +27,8 @@ urlpatterns = [
 
     # cliente-api
     path('cliente-api/', include('cliente.api.urls')), # http://127.0.0.1:8000/cliente-api/
+    # asesora-api
+    path('asesora-api/', include('asesora.api.urls')), # http://127.0.0.1:8000/asesora-api/
 
     # path de auth
     path('accounts/', include('django.contrib.auth.urls')),

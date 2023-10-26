@@ -14,5 +14,13 @@ urlpatterns = [
     path('accidente/detail/<int:pk>/', views.detail_accidente, name='accidente-detail'),
     path('accidente/update/<int:pk>/', views.update_accidente, name='asesoria-update'),
 
+    # CAPACITACIONES
+    path('capacitacion/list/', views.list_capacitacion, name='capacitacion-list'),
+    path('capacitacion/detail/<int:pk>/', views.detail_capacitacion, name='capacitacion-detail'),
+
+    # CONTRATOS
+    path('contrato/list/', views.list_contrato, name='contrato-list'),
+    path('contrato/detail/<int:pk>/', views.detail_contrato, name='contrato-detail'),
+
     
 ]

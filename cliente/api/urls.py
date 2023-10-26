@@ -1,7 +1,8 @@
 from django.urls import path, include
 
 from .views import (AsesoriaListAV, AsesoriaCreateAV, AsesoriaDetailAV, AsesoriaUpdateAV, 
-                    AccidenteListAV, AccidenteCreateAV,AccidenteDetailAV, AccidenteUpdateAV)
+                    AccidenteListAV, AccidenteCreateAV,AccidenteDetailAV, AccidenteUpdateAV,
+                    CapacitacionListAV, CapacitacionDetailAV, ContratoListAV, ContratoDetailAV)
 
 urlpatterns = [
     
@@ -16,4 +17,16 @@ urlpatterns = [
     path('accidente/new/', AccidenteCreateAV.as_view(), name='new-accidente-cliente-api'), # http://127.0.0.1:8000/cliente-api/accidente/new/
     path('accidente/detail/<int:pk>/', AccidenteDetailAV.as_view(), name='detail-accidente-cliente-api'), # http://127.0.0.1:8000/cliente-api/accidente/detail/<int:pk>/
     path('accidente/update/<int:pk>/', AccidenteUpdateAV.as_view(), name='update-accidente-cliente-api'), # http://127.0.0.1:8000/cliente-api/accidente/update/<int:pk>/
+
+    # CAPACITACIONES 
+    path('capacitacion/list/', CapacitacionListAV.as_view(), name='list-capacitacion-cliente-api'), # http://127.0.0.1:8000/cliente-api/capacitacion/list/
+    path('capacitacion/detail/<int:pk>/', CapacitacionDetailAV.as_view(), name='detail-capacitacion-cliente-api'), # http://127.0.0.1:8000/cliente-api/capacitacion/detail/<int:pk>/
+
+    # VISITAS
+
+    # FACTURAS
+
+    # CONTRATO
+    path('contrato/list/', ContratoListAV.as_view(), name='list-contrato-cliente-api'), # http://127.0.0.1:8000/cliente-api/contrato/list/
+    path('contrato/detail/<int:pk>/', ContratoDetailAV.as_view(), name='detail-contrato-cliente-api'), # http://127.0.0.1:8000/cliente-api/contrato/detail/<int:pk>/
 ]

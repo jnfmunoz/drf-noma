@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+{% load static %}
+{% block bootstrap5_title %}No More Accidents{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+          <div class="col-12" id="title-container" style="text-align:center">
+            <h1>Mi Contrato</h1>
+          </div>
+      </div>
+    </div>
+    <br>
+    <div class="container col-md-8" style="text-align: left;">
+      <hr>
+      <h5 id="id"></h5>
+      <h5 id="fkCliente"></h5>
+      <h5 id="fecha_inicio"></h5>
+      <h5 id="fecha_termino"></h5>
+      <h5 id="descripcion"></h5>
+      <h5 id="costo_mensual"></h5>
+      <h5 id="costo_modificacion_formulario"></h5>
+      <h5 id="costo_capacitacion_extra"></h5>
+      <h5 id="costo_asesoria_extra"></h5>
+      <h5 id="costo_actualizar_informe"></h5>
+    </div>
+    <br>
+    <br>
+    <div class="container col-md-8">
+      <br><br><br>
+      <div class="row">
+        <!-- <div class="container col-md-4" style="text-align: left;">
+          <a href="list-accidente.html" class="btn btn-secondary col-md-8"><img src="../../assets/img/icons/previous.png" alt="" width="38px" height="38px">Volver</a>
+        </div> -->
+        <!-- <div class="container col-md-4" style="text-align: center;">
+          <a href="update-accidente.html" class="btn btn-warning col-md-12"><img src="../../assets/img/icons/edit.png" alt="" width="38px" height="38px">Modificar</a>
+        </div> -->
+        <div class="container col-md-4">
+          <!-- <button>Editar</button> -->
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'core/js/cliente/contrato.js' %}"></script>
+{% endblock %}

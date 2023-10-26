@@ -3,9 +3,11 @@ from rest_framework import mixins, generics, status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
-from asesora.models import Asesoria, Accidente
+from asesora.models import Asesoria, Accidente, Capacitacion, Contrato
 from .serializers import (ListAsesoriaSerializer, UpdateCreateAsesoriaSerializer, DetailAsesoriaSerializer, 
-                          ListAccidenteSerializer,UpdateCreateAccidenteSerializer, DetailAccidenteSerializer)
+                          ListAccidenteSerializer,UpdateCreateAccidenteSerializer, DetailAccidenteSerializer,
+                          ListCapacitacionSerializer, DetailCapacitacionSerializer, ListContratoSerializer,
+                          DetailContratoSerializer)
 from .permissions import OwnerDetail
 
 class AsesoriaListAV(mixins.ListModelMixin, generics.GenericAPIView):
@@ -121,3 +123,55 @@ class AccidenteUpdateAV(mixins.RetrieveModelMixin, mixins.UpdateModelMixin , gen
     
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
+
+class CapacitacionListAV(mixins.ListModelMixin, generics.GenericAPIView):
+
+    # permission_classes = [OwnerDetail]
+    serializer_class = ListCapacitacionSerializer
+
+    """
+    Concrete view for listing a queryset.
+    """
+    def get_queryset(self):
+        return Capacitacion.objects.filter(fkCliente_id=self.request.user)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class CapacitacionDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
+
+
+    serializer_class = DetailCapacitacionSerializer
+    queryset = Capacitacion.objects.all()
+
+    """
+    Concrete view for retrieving a model instance.
+    """
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    
+class ContratoListAV(mixins.ListModelMixin, generics.GenericAPIView):
+
+    # permission_classes = [OwnerDetail]
+    serializer_class = ListContratoSerializer
+
+    """
+    Concrete view for listing a queryset.
+    """
+    def get_queryset(self):
+        return Contrato.objects.filter(fkCliente_id=self.request.user)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class ContratoDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
+
+
+    serializer_class = DetailContratoSerializer
+    queryset = Contrato.objects.all()
+
+    """
+    Concrete view for retrieving a model instance.
+    """
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)

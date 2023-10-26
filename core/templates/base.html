@@ -40,7 +40,7 @@
             {% comment %} {% endif %} {% endcomment %}
             {% comment %} {% if perms.asesora.view_capacitacion %}        {% endcomment %}
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#" style="color:#fff;">Capacitaciones</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'capacitacion-list' %}" style="color:#fff;">Capacitaciones</a>
                 </li>
             {% comment %} {% endif %} {% endcomment %}
             {% comment %} {% if perms.asesora.view_factura %}        {% endcomment %}
@@ -50,18 +50,18 @@
             {% comment %} {% endif %} {% endcomment %}
             {% comment %} {% if perms.asesora.view_contrato %} {% endcomment %}
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#" style="color:#fff;">Mi Contrato</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'contrato-list' %}" style="color:#fff;">Contrato</a>
                 </li>
             {% comment %} {% endif %} {% endcomment %}
             {% comment %} {% if perms.asesora.change_visita %} {% endcomment %}
-                <li class="nav-item">
+                {% comment %} <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#" style="color:#fff;">Visita Profesional</a>
-                </li>
+                </li> {% endcomment %}
             {% comment %} {% endif %} {% endcomment %}
             {% comment %} {% if perms.asesora.change_capacitacion %} {% endcomment %}
-                <li class="nav-item">
+                {% comment %} <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#" style="color:#fff;">Capacitación Profesional</a>
-                </li>
+                </li> {% endcomment %}
             {% comment %} {% endif %} {% endcomment %}
         </ul>
     </div>

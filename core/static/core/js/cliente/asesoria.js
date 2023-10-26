@@ -36,14 +36,14 @@ $(document).ready(function(){
         let tipoAsesoria = $("#comboTipoAsesoria").val();
         
         // Obtiene los valores de los campos de entrada
-        let descripcion = $("#descripcion").val();
+        // let descripcion = $("#descripcion").val();
         let nombre_fiscalizador = $('#nombre_fiscalizador').val();
         let numero = $("#numero_fiscalizador").val();
         let email = $("#email").val();
 
         // Crea un objeto con los datos que deseas enviar en la solicitud POST
         var dataToSend = {
-            "descripcion": descripcion,
+            // "descripcion": descripcion,
             "nombre_fiscalizador": nombre_fiscalizador,
             "numero_fiscalizador": numero,
             "email": email,
@@ -165,8 +165,14 @@ $(document).ready(function(){
                 success: function(data){
                     $('#id').text('N° Solicitud: ' + data.id);
                     $('#fecha-inicio').text('Fecha Inicio: ' + data.fecha_creacion);
-                    $('#descripcion').text('Informe situación: ' + data.descripcion);
 
+                    if(data.descripcion == null){
+                        $('#descripcion').text('Observaciones: No se han realizado observaciones');    
+                    }
+                    else{
+                        $('#descripcion').text('Observaciones: ' + data.descripcion);
+                    }
+                    
                     if(data.fecha_termino == null){
                         $('#fecha-termino').text('Fecha Término: Sin Asignar');
                     } 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from asesora.models import Asesoria, Accidente
+from asesora.models import Asesoria, Accidente, Capacitacion, Contrato
 
 class ListAsesoriaSerializer(serializers.ModelSerializer):
 
@@ -17,8 +17,7 @@ class UpdateCreateAsesoriaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Asesoria
-        # fields = '__all__'
-        exclude = ['fecha_creacion','fecha_termino', 'estado_asesoria', 'fkProfesional']
+        exclude = ['descripcion', 'fecha_creacion', 'fecha_termino', 'estado_asesoria', 'fkProfesional']
         estado_asesoria = serializers.CharField(source='estado_asesoria.descripcion')
         tipo_asesoria = serializers.CharField(source='tipo_asesoria.descripcion')
         
@@ -32,6 +31,8 @@ class DetailAsesoriaSerializer(serializers.ModelSerializer):
         exclude = ['fkCliente']
 
 class ListAccidenteSerializer(serializers.ModelSerializer):
+
+    fkCliente = serializers.StringRelatedField(read_only=True) 
 
     class Meta:
         model = Accidente
@@ -54,3 +55,39 @@ class DetailAccidenteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Accidente
         exclude = ['fkCliente']
+
+class ListCapacitacionSerializer(serializers.ModelSerializer):
+
+    fkCliente = serializers.StringRelatedField(read_only=True)
+    fkEstadoCapacitacion = serializers.CharField(source='fkEstadoCapacitacion.descripcion')
+    fkProfesional = serializers.StringRelatedField(read_only=True)
+    fkComuna = serializers.StringRelatedField(source='fkComuna.descripcion')
+
+    class Meta:
+        model = Capacitacion
+        fields = '__all__'
+
+class DetailCapacitacionSerializer(serializers.ModelSerializer):
+
+    fkProfesional = serializers.StringRelatedField(read_only=True)
+    fkEstadoCapacitacion = serializers.CharField(source='fkEstadoCapacitacion.descripcion')
+
+    class Meta:
+        model = Capacitacion
+        exclude = ['fkCliente']
+
+class ListContratoSerializer(serializers.ModelSerializer):
+
+    fkCliente = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Contrato
+        fields = '__all__'
+
+class DetailContratoSerializer(serializers.ModelSerializer):
+
+    fkCliente = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Contrato
+        fields = '__all__'

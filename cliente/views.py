@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from asesora.models import Asesoria, Accidente
+from asesora.models import Asesoria, Accidente, Capacitacion, Contrato
 
 # Create your views here.
 def list_asesoria(request):
@@ -38,3 +38,21 @@ def update_accidente(request, pk):
     context = {'accidente':accidente}
 
     return render(request, 'cliente/accidente/update-accidente.html', context)
+
+def list_capacitacion(request):
+    return render(request, 'cliente/capacitacion/list-capacitacion.html')
+
+def detail_capacitacion(request, pk):
+    capacitacion = Capacitacion.objects.get(pk=pk)
+    context = {'capacitacion':capacitacion}
+
+    return render(request, 'cliente/capacitacion/detail-capacitacion.html', context)
+
+def list_contrato(request):
+    return render(request, 'cliente/contrato/list-contrato.html')
+
+def detail_contrato(request, pk):
+    contrato = Contrato.objects.get(pk=pk)
+    context = {'contrato':contrato}
+
+    return render(request, 'cliente/contrato/detail-contrato.html', context)

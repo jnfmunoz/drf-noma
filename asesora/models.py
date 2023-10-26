@@ -50,7 +50,7 @@ class TipoPago(models.Model):
 
 class EstadoAsesoria(models.Model):
     
-    # Ingresada, En Curso, Finalizada, Aprobada(?), Rechazada(?)
+    # Agendada, En Curso, Finalizada, Cancelada
     descripcion = models.CharField(max_length=200)
     
     def __str__(self) -> str:
