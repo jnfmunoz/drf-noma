@@ -59,9 +59,9 @@
                 </div>
               </div> -->
               <br>
-              <tr class="col-12">
-                <th class="col-2">Fecha Solicitud</th>
-                <th class="col-2">Fecha Visita</th>
+              <tr class="col-12">                
+                <th class="col-2">Fecha Inicio</th>
+                <th class="col-2">Fecha Término</th>
                 <th class="col-2">Dirección</th>
                 <th class="col-2">Comuna</th>
                 <th class="col-2">Estado</th>
@@ -70,14 +70,14 @@
             </thead>          
             <tbody class="col-12" id="tbody-list">
               <tr class="col-12">
-                <td>11-09-2023</td>
+                {% comment %} <td>11-09-2023</td>
                 <td>13-09-2023</td>
                 <td>Calle Falsa #123</td>
                 <td>Puente Alto</td>
                 <td>En Curso</td>
                 <td>
                   <a href="" class="btn btn-outline-info btn-info text-dark"><img src="{% static 'core/img/icons/detail.png' %}" alt="" width="20px" height="20px">Ver Más</a>                  
-                </td>
+                </td> {% endcomment %}
               </tr>
             </tbody>
         </table>
@@ -85,4 +85,7 @@
     </div>
     <br>
     <br>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'core/js/cliente/visita.js' %}"></script>
 {% endblock %}

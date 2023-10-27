@@ -2,7 +2,8 @@ from django.urls import path, include
 
 from .views import (AsesoriaListAV, AsesoriaCreateAV, AsesoriaDetailAV, AsesoriaUpdateAV, 
                     AccidenteListAV, AccidenteCreateAV,AccidenteDetailAV, AccidenteUpdateAV,
-                    CapacitacionListAV, CapacitacionDetailAV, ContratoListAV, ContratoDetailAV)
+                    CapacitacionListAV, CapacitacionDetailAV, ContratoListAV, ContratoDetailAV,
+                    VisitaListAV)
 
 urlpatterns = [
     
@@ -23,6 +24,7 @@ urlpatterns = [
     path('capacitacion/detail/<int:pk>/', CapacitacionDetailAV.as_view(), name='detail-capacitacion-cliente-api'), # http://127.0.0.1:8000/cliente-api/capacitacion/detail/<int:pk>/
 
     # VISITAS
+    path('visita/list/', VisitaListAV.as_view(), name='list-visita-cliente-api'), # http://127.0.0.1:8000/cliente-api/visita/list/
 
     # FACTURAS
 

@@ -30,6 +30,9 @@ urlpatterns = [
     # asesora-api
     path('asesora-api/', include('asesora.api.urls')), # http://127.0.0.1:8000/asesora-api/
 
+    # registration-api
+    path('registration-api/', include('registration.api.urls')), # http://127.0.0.1:8000/registration-api/
+
     # path de auth
     path('accounts/', include('django.contrib.auth.urls')),
 

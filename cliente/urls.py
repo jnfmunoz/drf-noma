@@ -22,5 +22,6 @@ urlpatterns = [
     path('contrato/list/', views.list_contrato, name='contrato-list'),
     path('contrato/detail/<int:pk>/', views.detail_contrato, name='contrato-detail'),
 
-    
+    # VISITAS
+    path('visita/list/', views.list_visita, name='visita-list'),
 ]

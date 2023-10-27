@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, Permission ,AbstractUser
 
 # Create your models here.
 class Region(models.Model):
@@ -84,21 +84,29 @@ class EstadoServicio(models.Model):
     def __str__(self) -> str:
         return self.descripcion
 
-class Usuario(models.Model):
+# class Usuario(AbstractUser):
     
-    # user_auth = models.OneToOneField(User, on_delete=models.PROTECT)
-    password = models.CharField(max_length=128)
-    # last_login = models.DateTimeField(null=True, blank=True) #Por defecto que sea null
-    # is_superurser = models.BooleanField() #Por defecto que sea 0
-    username = models.CharField(max_length=150, unique=True)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=150, blank=True)
-    email = models.EmailField(blank=True)
-    # is_staff = models.BooleanField()
-    is_active = models.BooleanField()
-    date_joined = models.DateField(auto_now_add=True)    
-    # tipo_usuario = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
-    auth_group = models.ForeignKey(Group, on_delete=models.PROTECT)
+#     # user_auth = models.OneToOneField(User, on_delete=models.PROTECT)
+#     # password = models.CharField(max_length=128)
+#     # last_login = models.DateTimeField(null=True, blank=True) #Por defecto que sea null
+#     # is_superurser = models.BooleanField() #Por defecto que sea 0
+#     # username = models.CharField(max_length=150, unique=True)
+#     # first_name = models.CharField(max_length=30, blank=True)
+#     # last_name = models.CharField(max_length=150, blank=True)
+#     # email = models.EmailField(blank=True)
+#     # is_staff = models.BooleanField()
+#     # is_active = models.BooleanField()
+#     # date_joined = models.DateField(auto_now_add=True)    
+#     # tipo_usuario = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
+#     # auth_group = models.ForeignKey(Group, on_delete=models.PROTECT)
+
+#     class Meta:
+#         verbose_name = "Usuario"
+    
+#     # Añadiendo related_name personalizado a groups a user_permissions
+#     groups = models.ManyToManyField(Group, verbose_name="Grupos", blank=True, related_name="usuarios")
+#     user_permissions = models.ManyToManyField(Permission, verbose_name="Permisos de usuario", blank="True", related_name="usuarios_permisos")
+
 
 class Administrador(models.Model):
     
@@ -259,10 +267,9 @@ class RegistroError(models.Model):
     mensajeError = models.CharField(max_length=300)
 
     def __str__(self) -> str:
-        return f"Registro Erro {self.correlativo}"
+        return f"Registro Error {self.correlativo}"
 
-class IdxUsr(models.Model):
+# class IdxUsr(models.Model):
     
-    fkUsuario = models.OneToOneField(Usuario, on_delete=models.PROTECT)
-    fkUser = models.OneToOneField(User, on_delete=models.PROTECT)
-
+#     fkUsuario = models.OneToOneField(Usuario, on_delete=models.PROTECT)
+#     fkUser = models.OneToOneField(User, on_delete=models.PROTECT)

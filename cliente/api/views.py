@@ -3,11 +3,11 @@ from rest_framework import mixins, generics, status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
-from asesora.models import Asesoria, Accidente, Capacitacion, Contrato
+from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita
 from .serializers import (ListAsesoriaSerializer, UpdateCreateAsesoriaSerializer, DetailAsesoriaSerializer, 
                           ListAccidenteSerializer,UpdateCreateAccidenteSerializer, DetailAccidenteSerializer,
                           ListCapacitacionSerializer, DetailCapacitacionSerializer, ListContratoSerializer,
-                          DetailContratoSerializer)
+                          DetailContratoSerializer, ListVisitaSerializer)
 from .permissions import OwnerDetail
 
 class AsesoriaListAV(mixins.ListModelMixin, generics.GenericAPIView):
@@ -175,3 +175,17 @@ class ContratoDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
     """
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
+    
+class VisitaListAV(mixins.ListModelMixin, generics.GenericAPIView):
+
+    # permission_classes = []
+    serializer_class = ListVisitaSerializer
+
+    """
+    Concrete view for listing a queryset.
+    """
+    def get_queryset(self):
+        return Visita.objects.filter(fkCliente_id=self.request.user)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

@@ -9,4 +9,4 @@ class RegionSerializer(serializers.ModelSerializer):
 class ComunaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comuna
-        fields = '__all__'
+        fields = '__all__'        

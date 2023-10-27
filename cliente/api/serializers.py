@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from asesora.models import Asesoria, Accidente, Capacitacion, Contrato
+from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita
 
 class ListAsesoriaSerializer(serializers.ModelSerializer):
 
@@ -90,4 +90,14 @@ class DetailContratoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contrato
+        fields = '__all__'
+
+class ListVisitaSerializer(serializers.ModelSerializer):
+
+    fkCliente = serializers.StringRelatedField(read_only=True)
+    fkComuna = serializers.StringRelatedField(source='fkComuna.descripcion')
+    fkEstadoVisita = serializers.CharField(source='fkEstadoVisita.descripcion')
+
+    class Meta:
+        model = Visita
         fields = '__all__'

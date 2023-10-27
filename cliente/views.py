@@ -56,3 +56,7 @@ def detail_contrato(request, pk):
     context = {'contrato':contrato}
 
     return render(request, 'cliente/contrato/detail-contrato.html', context)
+
+def list_visita(request):
+    return render(request, 'cliente/visita/list-visita.html')
+
