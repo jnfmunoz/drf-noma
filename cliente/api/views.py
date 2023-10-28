@@ -7,7 +7,7 @@ from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita
 from .serializers import (ListAsesoriaSerializer, UpdateCreateAsesoriaSerializer, DetailAsesoriaSerializer, 
                           ListAccidenteSerializer,UpdateCreateAccidenteSerializer, DetailAccidenteSerializer,
                           ListCapacitacionSerializer, DetailCapacitacionSerializer, ListContratoSerializer,
-                          DetailContratoSerializer, ListVisitaSerializer)
+                          DetailContratoSerializer, ListVisitaSerializer, DetailVisitaSerializer)
 from .permissions import OwnerDetail
 
 class AsesoriaListAV(mixins.ListModelMixin, generics.GenericAPIView):
@@ -189,3 +189,14 @@ class VisitaListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+    
+class VisitaDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
+
+    serializer_class = DetailVisitaSerializer
+    queryset = Visita.objects.all()
+
+    """
+    Concrete view for retrieving a model instance.
+    """
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)

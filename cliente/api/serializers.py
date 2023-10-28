@@ -101,3 +101,13 @@ class ListVisitaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Visita
         fields = '__all__'
+
+class DetailVisitaSerializer(serializers.ModelSerializer):
+
+    fkCliente = serializers.StringRelatedField(read_only=True)
+    fkComuna = serializers.StringRelatedField(source='fkComuna.descripcion')
+    fkEstadoVisita = serializers.CharField(source='fkEstadoVisita.descripcion')
+
+    class Meta:
+        model = Visita
+        fields = '__all__'

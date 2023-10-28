@@ -3,7 +3,7 @@ from django.urls import path, include
 from .views import (AsesoriaListAV, AsesoriaCreateAV, AsesoriaDetailAV, AsesoriaUpdateAV, 
                     AccidenteListAV, AccidenteCreateAV,AccidenteDetailAV, AccidenteUpdateAV,
                     CapacitacionListAV, CapacitacionDetailAV, ContratoListAV, ContratoDetailAV,
-                    VisitaListAV)
+                    VisitaListAV, VisitaDetailAV)
 
 urlpatterns = [
     
@@ -25,6 +25,7 @@ urlpatterns = [
 
     # VISITAS
     path('visita/list/', VisitaListAV.as_view(), name='list-visita-cliente-api'), # http://127.0.0.1:8000/cliente-api/visita/list/
+    path('visita/detail/<int:pk>/', VisitaDetailAV.as_view(), name='detail-visita-cliente-api'), # http://127.0.0.1:8000/cliente-api/visita/detail/<int:pk>/
 
     # FACTURAS
 

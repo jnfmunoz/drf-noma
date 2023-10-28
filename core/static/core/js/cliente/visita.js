@@ -29,5 +29,23 @@ $(document).ready(function(){
             });
     };
 
+    function buildDetail(){
+
+        let url = window.location.href;
+        let parts = url.split('/');
+        let id = parts[parts.length - 2];
+
+        let apiURL = 'http://127.0.0.1:8000/cliente-api/visita/detail/' + id + '/';
+
+        $.ajax({
+            url: apiURL,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+                
+            },
+        })
+    }
+
     buildList();
 });
