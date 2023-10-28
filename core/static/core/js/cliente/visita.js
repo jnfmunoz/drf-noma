@@ -19,7 +19,7 @@ $(document).ready(function(){
                                                     <td class="col-2">${visita.fkComuna}</td>
                                                     <td class="col-2">${visita.fkEstadoVisita}</td>
                                                     <td class="col-2">                                                    
-                                                        <a href="#" class="btn btn-outline-info btn-info text-dark">Ver Más</a>
+                                                        <a href="/cliente/visita/detail/${visita.id}/" class="btn btn-outline-info btn-info text-dark">Ver Más</a>
                                                     </td>                                                        
                                                 </tr>`
 
@@ -42,10 +42,17 @@ $(document).ready(function(){
             type: 'GET',
             dataType: 'json',
             success: function(data){
-                
+                $('#fecha_inicio').text('Fecha Inicio: ' + data.fecha_inicio);
+                $('#fecha_termino').text('Fecha Termino: ' + data.fecha_termino);                
+                $('#profesional').text('Profesional Asignado: ' + data.fkProfesional);                
+                $('#estado').text('Estado Visita: ' + data.fkEstadoVisita);
+                $('#direccion').text('Dirección: ' + data.direccion);
+                $('#comuna').text('Comuna: ' + data.fkComuna);
+                $('#descripcion').text('Observaciones: ')
             },
         })
     }
 
+    buildDetail();
     buildList();
 });

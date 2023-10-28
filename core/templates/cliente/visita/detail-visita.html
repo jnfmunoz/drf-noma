@@ -27,9 +27,9 @@
         <h5 id="descripcion"></h5>
         <!-- <h5>Profesional Asignado: Sin Asignar</h5> -->
         <br>
-        <h3 style="text-align: center;">Plan de Mejora</h3>
+        {% comment %} <h3 style="text-align: center;">Plan de Mejora</h3>
         <hr>
-        <h5 id=""></h5>
+        <h5 id=""></h5> {% endcomment %}
     </div>
     <br>
     <br>
@@ -37,7 +37,7 @@
       <br><br><br>
       <div class="row">
         <div class="container col-md-4" style="text-align: left;">
-          <a href="{% url 'visitas' %}" class="btn btn-secondary col-md-8"><img src="{% static 'core/img/icons/previous.png' %}" alt="" width="38px" height="38px">Volver</a>
+          <a href="" class="btn btn-secondary col-md-8"><img src="{% static 'core/img/icons/previous.png' %}" alt="" width="38px" height="38px">Volver</a>
         </div>
         <!-- <div class="container col-md-4" style="text-align: center;">
           <a href="update-asesoria.html" class="btn btn-warning col-md-12"><img src="../../assets/img/icons/edit.png" alt="" width="38px" height="38px">Editar Solicitud</a>
@@ -51,4 +51,6 @@
     <br>
     <br>
     <br>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'core/js/cliente/visita.js' %}"></script>
 {% endblock %}

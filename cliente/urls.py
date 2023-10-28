@@ -24,4 +24,5 @@ urlpatterns = [
 
     # VISITAS
     path('visita/list/', views.list_visita, name='visita-list'),
+    path('visita/detail/<int:pk>/', views.detail_visita, name='visita-detail'),
 ]

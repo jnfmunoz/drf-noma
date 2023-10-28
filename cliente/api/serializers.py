@@ -107,6 +107,7 @@ class DetailVisitaSerializer(serializers.ModelSerializer):
     fkCliente = serializers.StringRelatedField(read_only=True)
     fkComuna = serializers.StringRelatedField(source='fkComuna.descripcion')
     fkEstadoVisita = serializers.CharField(source='fkEstadoVisita.descripcion')
+    fkProfesional = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Visita
