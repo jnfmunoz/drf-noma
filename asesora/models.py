@@ -56,12 +56,12 @@ class EstadoAsesoria(models.Model):
     def __str__(self) -> str:
         return self.descripcion
 
-class EstadoFactura(models.Model):
+# class EstadoFactura(models.Model):
 
-    descripcion = models.CharField(max_length=200)
+#     descripcion = models.CharField(max_length=200)
     
-    def __str__(self) -> str:
-        return self.descripcion
+#     def __str__(self) -> str:
+#         return self.descripcion
 
 class EstadoVisita(models.Model):
 
@@ -206,8 +206,9 @@ class Factura(models.Model):
     fecha_emision = models.DateField(auto_now_add=True)
     fecha_vencimento = models.DateField()
     total_factura = models.FloatField()
-    fkEstadoFactura = models.ForeignKey(EstadoFactura, on_delete=models.PROTECT)
+    # fkEstadoFactura = models.ForeignKey(EstadoFactura, on_delete=models.PROTECT)
     fkCliente = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='cliente')
+    pagada = models.BooleanField(default=False)
 
 class DetallePago(models.Model):
 

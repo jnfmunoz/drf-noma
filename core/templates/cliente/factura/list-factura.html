@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+{% load static %}
+{% block bootstrap5_title %}No More Accidents{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div class="container" style="text-align:center">
+      <div class="row">
+          <div class="col-12" id="title-container">
+            <h3>Facturas</h3>
+          </div>
+      </div>
+    </div>
+    <!-- <div class="container" style="text-align:center;">      
+      <div class="row">
+        <div class="col-12">
+          <a href="new-asesoria.html" class="btn btn-primary col-md-4"><img src="../../assets/img/icons/new-asesoria.png" alt="">Nueva Asesoría</a>
+        </div>
+      </div>
+      <br>
+      <hr>
+    </div> -->
+    <br>
+    <br>
+    <div class="container col-12" style="text-align: center;">
+      <div class="table table-sm">
+      <form method="GET">
+          <table class="table table-secondary table-bordered table-striped">
+            <thead>
+              <div class="row">
+                <div class="col-12 col-md-4 padding-our">
+                  <label for="fechainicio">Fecha Emisión</label>
+                    <div class="input-group">
+                      <input type="date" id="fechainicio" name="fechainicio" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 padding-our">
+                    <label for="fechatermino">Fecha vencimiento</label>
+                    <div class="input-group">
+                      <input type="date" id="fechatermino" name="fechatermino" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 padding-our">
+                    <button type="submit" class="btn btn-outline-primary btn-primary text-light mt-3"><img src="{% static 'core/img/icons/search-find.png' %}" alt="" width="25px" height="25px">Filtrar</button>
+                    <button type="reset" class="btn btn-outline-secondary btn-secondary text-light mt-3"><img src="{% static 'core/img/icons/clean.png' %}" alt="" width="25px" height="25px"> Restablecer</button>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <tr class="col-12">
+                <th class="col-1">N°</th>
+                <th class="col-1">Fecha emisión</th>
+                <th class="col-1">Fecha vencimiento</th>
+                <th class="col-1">Monto a pagar</th>                
+                <th class="col-1">Estado</th>
+                <th class="col-2">Acciones</th>                
+              </tr>
+            </thead>          
+            <tbody class="col-12" id="tbody-list">
+              <tr class="col-12">
+                <td>1</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>$xxx.xxx</td>                
+                <td>Por pagar</td>
+                <td>
+                  <!-- <a href="update-capacitacion.html" class="btn btn-outline-warning btn-warning text-dark"><img src="../../assets/img/icons/edit.png" alt="" width="20px" height="20px">Actualizar</a> -->
+                  <a href="" class="btn btn-outline-info btn-info text-dark"><img src="{% static 'core/img/icons/detail.png' %}" alt="" width="20px" height="20px">Ver Más</a>                  
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <br>
+{% endblock %}

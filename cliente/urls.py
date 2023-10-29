@@ -26,6 +26,7 @@ urlpatterns = [
     path('visita/list/', views.list_visita, name='visita-list'),
     path('visita/detail/<int:pk>/', views.detail_visita, name='visita-detail'),
 
-    # FACTURAS
-    
+    # FACTURAS 
+    path('factura/list/', views.list_factura, name='factura-list'),
+    path('factura/detail/<int:pk>/', views.detail_factura, name='factura-detail'),
 ]

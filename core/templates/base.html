@@ -45,7 +45,7 @@
             {% comment %} {% endif %} {% endcomment %}
             {% comment %} {% if perms.asesora.view_factura %}        {% endcomment %}
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#" style="color:#fff;">Facturas</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'factura-list' %}" style="color:#fff;">Facturas</a>
                 </li>
             {% comment %} {% endif %} {% endcomment %}
             {% comment %} {% if perms.asesora.view_contrato %} {% endcomment %}

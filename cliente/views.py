@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita
+from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita, Factura
 
 # Create your views here.
 def list_asesoria(request):
@@ -65,3 +65,12 @@ def detail_visita(request, pk):
     context = {'visita':visita}
 
     return render(request, 'cliente/visita/detail-visita.html', context);
+
+def list_factura(request):
+    return render(request, 'cliente/factura/list-factura.html');
+
+def detail_factura(request, pk):
+    factura = Factura.objects.get(pk=pk)
+    context = {'factura':factura}
+
+    return render(request, 'cliente/factura/detail-factura.html', context);
