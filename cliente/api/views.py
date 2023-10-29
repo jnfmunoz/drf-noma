@@ -3,11 +3,12 @@ from rest_framework import mixins, generics, status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
-from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita
+from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita, Factura
 from .serializers import (ListAsesoriaSerializer, UpdateCreateAsesoriaSerializer, DetailAsesoriaSerializer, 
                           ListAccidenteSerializer,UpdateCreateAccidenteSerializer, DetailAccidenteSerializer,
                           ListCapacitacionSerializer, DetailCapacitacionSerializer, ListContratoSerializer,
-                          DetailContratoSerializer, ListVisitaSerializer, DetailVisitaSerializer)
+                          DetailContratoSerializer, ListVisitaSerializer, DetailVisitaSerializer, ListFacturaSerializer,
+                          DetailFacturaSerializer)
 from .permissions import OwnerDetail
 
 class AsesoriaListAV(mixins.ListModelMixin, generics.GenericAPIView):
@@ -194,6 +195,31 @@ class VisitaDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
 
     serializer_class = DetailVisitaSerializer
     queryset = Visita.objects.all()
+
+    """
+    Concrete view for retrieving a model instance.
+    """
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    
+class FacturaListAV(mixins.ListModelMixin, generics.GenericAPIView):
+
+    # permission_classes = []
+    serializer_class = ListFacturaSerializer
+
+    """
+    Concrete view for listing a queryset.
+    """
+    def get_queryset(self):
+        return Factura.objects.filter(fkCliente_id=self.request.user)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class FacturaDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
+
+    serializer_class = DetailFacturaSerializer
+    queryset = Factura.objects.all()
 
     """
     Concrete view for retrieving a model instance.

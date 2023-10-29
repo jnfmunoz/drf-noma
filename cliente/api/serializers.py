@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita
+from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita, Factura
 
 class ListAsesoriaSerializer(serializers.ModelSerializer):
 
@@ -111,4 +111,22 @@ class DetailVisitaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Visita
+        fields = '__all__'
+
+class ListFacturaSerializer(serializers.ModelSerializer):
+
+    fkCliente = serializers.StringRelatedField(read_only=True) 
+    fkEstadoFactura = serializers.StringRelatedField(read_only=True) 
+
+    class Meta:
+        model = Factura
+        fields = '__all__'
+
+class DetailFacturaSerializer(serializers.ModelSerializer):
+
+    fkCliente = serializers.StringRelatedField(read_only=True) 
+    fkEstadoFactura = serializers.StringRelatedField(read_only=True) 
+
+    class Meta:
+        model = Factura
         fields = '__all__'

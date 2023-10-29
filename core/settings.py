@@ -155,3 +155,11 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Auth redirects
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# Emails 
+if DEBUG: 
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+else:
+    # Aquí hay que configurar un email real para produccion
+    pass 
