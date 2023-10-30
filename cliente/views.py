@@ -4,6 +4,11 @@ from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita, 
 
 # Create your views here.
 def list_asesoria(request):
+
+    # asesorias = Asesoria.objects.all()
+    
+    # filter_fecha_inicio = request.POST.get()
+
     return render(request, 'cliente/asesoria/list-asesoria.html');
 
 def new_asesoria(request):

@@ -60,7 +60,7 @@
             </thead>          
             <tbody class="col-12" id="tbody-list">
               <tr class="col-12">
-                <td>1</td>
+                {% comment %} <td>1</td>
                 <td>13-09-2023</td>
                 <td>20-09-2023</td>
                 <td>$xxx.xxx</td>                
@@ -68,12 +68,15 @@
                 <td>
                   <!-- <a href="update-capacitacion.html" class="btn btn-outline-warning btn-warning text-dark"><img src="../../assets/img/icons/edit.png" alt="" width="20px" height="20px">Actualizar</a> -->
                   <a href="" class="btn btn-outline-info btn-info text-dark"><img src="{% static 'core/img/icons/detail.png' %}" alt="" width="20px" height="20px">Ver Más</a>                  
-                </td>
-              </tr>
+                </td> {% endcomment %}
+              </tr> 
             </tbody>
         </table>
       </div>
     </div>
     <br>
     <br>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'core/js/cliente/factura.js' %}"></script>
 {% endblock %}

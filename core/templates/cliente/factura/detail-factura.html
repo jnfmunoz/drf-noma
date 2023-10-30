@@ -10,21 +10,22 @@
     <div class="container">
       <div class="row">
           <div class="col-12" id="title-container" style="text-align:center">
-            <h3>Factura</h3>
+            <h3>Detalle Factura</h3>
           </div>
       </div>
     </div>
     <br>
-    <br>
     <div class="container col-md-8" style="text-align: left;">
-        <h3 style="text-align: center;">Id: 1</h3>
-        <h4 style="text-align: center;">Detalle Factura</h4>
+        <h3 id="id" style="text-align: center;"></h3>
+
         <hr>
-        <h5>Fecha Emisión: 13-09-2023</h5>
-        <h5>Fecha vencimiento: 20-09-2023</h5>
-        <h5>Monto a pagar: $xxx.xxx</h5>
+        <h5 id="fecha_emision"></h5>
+        <h5 id="fecha_vencimento"></h5>
+        <h5 id="total_factura"></h5>
+        <h5 id="pagada"></h5>
     </div>
-    <div class="container col-12" style="text-align: center;">
+    {% comment %} Aqui va la tabla detalle factura {% endcomment %}
+    {% comment %} <div class="container col-12" style="text-align: center;">
         <div class="table-responsive table-sm">
         <form method="GET">
             <table class="table table-secondary table-bordered table-striped">
@@ -59,7 +60,7 @@
               </tbody>
           </table>
         </div>
-      </div>
+      </div> {% endcomment %}
     <br>
     <br>
     <div class="container col-md-8">
@@ -81,4 +82,6 @@
     <br>
     <br>
     <br>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'core/js/cliente/factura.js' %}"></script>
 {% endblock %}

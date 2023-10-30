@@ -267,3 +267,6 @@ class IdxUsr(models.Model):
     
     fkUsuario = models.OneToOneField(Usuario, on_delete=models.PROTECT)
     fkUser = models.OneToOneField(User, on_delete=models.PROTECT)
+
+# class detalleFactura(models.Model):
+
