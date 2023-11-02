@@ -3,13 +3,17 @@ from rest_framework import mixins, generics, status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
-from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita, Factura
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend 
+
+from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita, Factura, FormularioVisita, DetalleFormulario
 from .serializers import (ListAsesoriaSerializer, UpdateCreateAsesoriaSerializer, DetailAsesoriaSerializer, 
                           ListAccidenteSerializer,UpdateCreateAccidenteSerializer, DetailAccidenteSerializer,
                           ListCapacitacionSerializer, DetailCapacitacionSerializer, ListContratoSerializer,
                           DetailContratoSerializer, ListVisitaSerializer, DetailVisitaSerializer, ListFacturaSerializer,
-                          DetailFacturaSerializer)
+                          DetailFacturaSerializer, FormularioVisitaSerializer, DetalleFormularioSerializer)
 from .permissions import OwnerDetail
+from .filters import AccidenteFilter
 
 class AsesoriaListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
@@ -72,6 +76,8 @@ class AccidenteListAV(mixins.ListModelMixin, generics.GenericAPIView):
     
     permission_classes = [OwnerDetail]
     serializer_class = ListAccidenteSerializer
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_class = AccidenteFilter # Filtro personalizado
 
     """
     Concrete view for listing a queryset.
@@ -226,3 +232,21 @@ class FacturaDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
     """
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
+    
+class FormularioVisitaAV(mixins.ListModelMixin, generics.GenericAPIView):
+
+    serializer_class = FormularioVisitaSerializer
+    
+    def get_queryset(self):
+        return FormularioVisita.objects.filter(fkCliente_id=self.request.user)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+class DetalleFormularioAV(mixins.ListModelMixin, generics.GenericAPIView):
+
+    serializer_class = DetalleFormularioSerializer
+    queryset = DetalleFormulario.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

@@ -15,17 +15,46 @@
       </div>
     </div>
     <br>
-    <div class="container col-md-8" style="text-align: left;">
+    <form action="{% url 'iniciar_pago' factura.id %}" method="post">
+      <div class="container col-md-8" style="text-align: left;">
+        {% csrf_token %}
         <h3 id="id" style="text-align: center;"></h3>
-
+        
         <hr>
         <h5 id="fecha_emision"></h5>
         <h5 id="fecha_vencimento"></h5>
         <h5 id="total_factura"></h5>
         <h5 id="pagada"></h5>
-    </div>
+      </div>
+  
+      <br>
+      <br>
+      <div class="container col-md-8">
+        <br><br><br>
+        <div class="row">
+          <div class="container col-md-4" style="text-align: left;">
+            <a href="{% url 'factura-list' %}" class="btn btn-secondary col-md-8"><img src="{% static 'core/img/icons/previous.png' %}" alt="" width="38px" height="38px">Volver</a>
+          </div>
+          <!-- aqui deberia estar el boton de pagar -->
+          <div class="container col-md-4" style="text-align: center;">
+            <input type="hidden" name="factura_id" value="{{ factura.id }}">
+            <button type="submit" class="btn btn-warning"><img src="{% static 'core/img/icons/payment.png' %}" alt="" width="38px" height="38px">Pagar</button>
+            <!-- <a href="" class="btn btn-warning col-md-12"><img src="{% static 'core/img/icons/payment.png' %}" alt="" width="38px" height="38px">Pagar</a> -->
+          </div>
+          <div class="container col-md-4">
+            <!-- <button>Editar</button> -->
+          </div>
+        </div>
+      </div>
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+
     {% comment %} Aqui va la tabla detalle factura {% endcomment %}
-    {% comment %} <div class="container col-12" style="text-align: center;">
+    {% comment %} 
+    <div class="container col-12" style="text-align: center;">
         <div class="table-responsive table-sm">
         <form method="GET">
             <table class="table table-secondary table-bordered table-striped">
@@ -60,28 +89,9 @@
               </tbody>
           </table>
         </div>
-      </div> {% endcomment %}
-    <br>
-    <br>
-    <div class="container col-md-8">
-      <br><br><br>
-      <div class="row">
-        <div class="container col-md-4" style="text-align: left;">
-          <a href="" class="btn btn-secondary col-md-8"><img src="{% static 'core/img/icons/previous.png' %}" alt="" width="38px" height="38px">Volver</a>
-        </div>
-        <!-- aqui deberia estar el boton de pagar -->
-        <div class="container col-md-4" style="text-align: center;">
-          <a href="" class="btn btn-warning col-md-12"><img src="{% static 'core/img/icons/payment.png' %}" alt="" width="38px" height="38px">Pagar</a>
-        </div>
-        <div class="container col-md-4">
-          <!-- <button>Editar</button> -->
-        </div>
-      </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
+      </div> 
+    {% endcomment %}
+
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script type="text/javascript" src="{% static 'core/js/cliente/factura.js' %}"></script>
 {% endblock %}

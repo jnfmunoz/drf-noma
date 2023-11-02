@@ -161,7 +161,7 @@ class Asesoria(models.Model):
     estado_asesoria = models.ForeignKey(EstadoAsesoria, on_delete=models.PROTECT, related_name="estado_asesoria", default=1)
 
     def __str__(self) -> str:
-        return str(self.id)+ ' | ' + str(self.tipo_asesoria) + ' | ' + self.descripcion + ' | ' + str(self.estado_asesoria)
+        return str(self.id)+ ' | ' + str(self.tipo_asesoria) + ' | ' + str(self.descripcion) + ' | ' + str(self.estado_asesoria)
     
 class Accidente(models.Model):
 
@@ -219,12 +219,18 @@ class DetallePago(models.Model):
 class ElementoRevision(models.Model):
 
     descripcion = models.CharField(max_length=200)
+    
+    def __str__(self) -> str:
+        return self.descripcion
 
 class FormularioVisita(models.Model):
 
     cant_parametro = models.IntegerField(default=0)
     con_problema = models.CharField(max_length=1)
     fkCliente = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='cliente')
+
+    def __str__(self) -> str:
+        return str(self.id)
 
 class Visita(models.Model):
 
@@ -246,8 +252,8 @@ class PlanMejora(models.Model):
 class DetalleFormulario(models.Model):
 
     se_cumple = models.CharField(max_length=1)
-    fkFormularioVisita = models.ForeignKey(FormularioVisita, on_delete=models.PROTECT)
-    fkElementoRevision = models.ForeignKey(ElementoRevision, on_delete=models.PROTECT)
+    fkFormularioVisita = models.ForeignKey(FormularioVisita, on_delete=models.PROTECT, related_name="item")
+    fkElementoRevision = models.ForeignKey(ElementoRevision, on_delete=models.PROTECT, related_name="elementorevision")
 
 class ReporteMensual(models.Model):
 
@@ -269,4 +275,3 @@ class IdxUsr(models.Model):
     fkUser = models.OneToOneField(User, on_delete=models.PROTECT)
 
 # class detalleFactura(models.Model):
-

@@ -30,28 +30,37 @@
 
     <div class="container col-12" style="text-align: center;">
       <div class="table table-sm">
-      <form method="GET">
+      <form method="GET" id="filter-form">
+        <div class="row">
+          <div class="col-12 col-md-4 padding-our">
+            <label for="fechainicio">Fecha Accidente</label>
+              <div class="input-group">
+                <input type="date" id="fechainicio" name="fechainicio" class="form-control">
+              </div>
+          </div>
+          <div class="col-12 col-md-4 padding-our">
+            <label for="tipo_accidente">Tipo de Accidente:</label>                    
+              <div class="form-group">
+                <select id="tipo_accidente" style="text-align: center;" name="tipo_accidente" onchange="combo(this, 'tipo_accidente')" class="form-control">
+                {% comment %} Por caída, Por exposición o contacto, Por sobreesfuerzo o golpes, Por movimientos repetitivos {% endcomment %}
+                  <option value="">Todos</option>
+                  <option value="1">Por caída</option>
+                  <option value="2">Por exposición o contacto</option>
+                  <option value="3">Por sobreesfuerzo o golpes</option>
+                  <option value="4">Por movimientos repetitivos</option>
+                </select>
+              </div>
+          </div>
+          <div class="col-12 col-md-4 padding-our">
+            <button type="submit" class="btn btn-outline-primary btn-primary text-light mt-3"><img src="{% static 'core/img/icons/search-find.png' %}" alt="" width="25px" height="25px">Filtrar</button>
+            <button type="reset" class="btn btn-outline-secondary btn-secondary text-light mt-3"><img src="{% static 'core/img/icons/clean.png' %}" alt="" width="25px" height="25px"> Restablecer</button>
+          </div>
+          </div>
+        </div>
+      
         <table class="table table-secondary table-bordered table-striped">
             <thead>
-              <div class="row">
-                <div class="col-12 col-md-4 padding-our">
-                  <label for="fechainicio">Fecha Accidente</label>
-                    <div class="input-group">
-                      <input type="date" id="fechainicio" name="fechainicio" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-4 padding-our">
-                    <label for="fechatermino">Tipo Accidente</label>
-                    <div class="input-group">
-                      <input type="text" id="fechatermino" name="fechatermino" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-4 padding-our">
-                    <button type="submit" class="btn btn-outline-primary btn-primary text-light mt-3"><img src="{% static 'core/img/icons/search-find.png' %}" alt="" width="25px" height="25px">Filtrar</button>
-                    <button type="reset" class="btn btn-outline-secondary btn-secondary text-light mt-3"><img src="{% static 'core/img/icons/clean.png' %}" alt="" width="25px" height="25px"> Restablecer</button>
-                  </div>
-                </div>
-              </div>
+              
               <br>
               <tr class="col-12">
                 <th class="col-2">Fecha Accidente</th>
@@ -75,9 +84,10 @@
               </tr> 
               {% endcomment %}
             </tbody>
+            </form>
         </table>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script type="text/javascript" src="{% static 'core/js/cliente/accidente.js' %}"></script>
+    <script type="text/javascript" src="{% static 'core/js/cliente/accidente.js' %}" defer></script>
 {% endblock %}

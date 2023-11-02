@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'asesora.apps.AsesoraConfig',
     'cliente.apps.ClienteConfig',
+    'pago.apps.PagoConfig',
     # profesional
     'bootstrap5',
     'crispy_forms',
@@ -163,3 +164,17 @@ if DEBUG:
 else:
     # Aquí hay que configurar un email real para produccion
     pass 
+
+# TRANSBANK
+TBK_COMMERCE_CODE = "597055555532"
+TBK_PRIVATE_KEY =   "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"
+WEBPAY_URL = "https://webpay3gint.transbank.cl"
+
+# Configuración de Transbank
+TRANSBANK = {
+    'INTEGRATION_TYPE': 'TEST',  # Cambia a 'LIVE' en producción
+    'API_KEY': TBK_PRIVATE_KEY,
+    'COMMERCE_CODE': TBK_COMMERCE_CODE,
+    'RETURN_URL': 'http://127.0.0.1:8000/cliente/factura/list/',  # URL de retorno
+    'WEBPAY_URL': WEBPAY_URL 
+}

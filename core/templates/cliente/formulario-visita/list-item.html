@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+{% load static %}
+{% block bootstrap5_title %}No More Accidents | Items Formulario{% endblock %}
+
+{% block content %}
+        <br>
+    <br>
+    <br>
+    <div class="container" style="text-align:center">
+      <div class="row">
+          <div class="col-12" id="title-container">
+            <br>
+            <h1>Formulario Visita</h1>
+          </div>
+      </div>
+    </div>    
+    <br>    
+    <br>
+    <div class="container col-12" style="text-align: center;">    
+      <div class="table table-sm">
+      <form method="GET">
+          <table class="table table-secondary table-bordered table-striped">
+            <thead>            
+              <br>
+              <tr class="col-12">
+                <th class="col-md-1">Id</th>
+                <th class="col-md-4">Elemento Revisión</th>
+                <th class="col-md-4">Se cumple</th>                
+              </tr>
+            </thead>          
+            <tbody class="col-12" id="tbody-list">
+              {% comment %} <tr class="col-12">
+                <td>1</td>
+                <td>Cumple con EPP</td>
+                <td>Cumple con EPP</td>
+              </tr> {% endcomment %}
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="container col-md-8">
+        <br><br><br>
+        <div class="row">
+          {% comment %} <div class="container col-md-4" style="text-align: left;">
+            <a href="" class="btn btn-secondary col-md-8"><img src="{% static 'core/img/icons/previous.png' %}" alt="" width="38px" height="38px">Volver</a>
+          </div> {% endcomment %}
+          <div class="container col-md-4">
+            
+          </div>
+        </div>
+      </div>
+    <br>
+    <br>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'core/js/cliente/formulario-visita.js' %}"></script>
+{% endblock %}

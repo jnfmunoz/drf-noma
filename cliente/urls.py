@@ -29,4 +29,7 @@ urlpatterns = [
     # FACTURAS 
     path('factura/list/', views.list_factura, name='factura-list'),
     path('factura/detail/<int:pk>/', views.detail_factura, name='factura-detail'),
+
+    # FORMULARIO VISITA
+    path('formulario-visita/list/', views.list_item, name='formulario-visita'),
 ]

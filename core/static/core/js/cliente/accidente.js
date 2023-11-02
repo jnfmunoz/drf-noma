@@ -14,7 +14,7 @@ $(document).ready(function(){
                     // Por caída, Por exposición o contacto, Por sobreesfuerzo o golpes, Por movimientos repetitivos
                     let tipoAccidente = "";
                     if(accidente.tipo_accidente === 1) {
-                        tipoAccidente = "Por Caída";
+                        tipoAccidente = "Por caída";
                     }
                     else if(accidente.tipo_accidente === 2){
                         tipoAccidente = "Por exposición o contacto";
@@ -209,6 +209,70 @@ $(document).ready(function(){
             });
         });
     };
+
+    //ITERACION 3
+    // // $('#filter-form').on('submit', function(e){
+    // function combo(){
+        
+    //     const url = 'http://127.0.0.1:8000/cliente-api/accidente/list/';
+        
+    //     // Obtiene los valores de los campos de filtro
+    //     let fechaInicio = $('#fechainicio').val();
+    //     let tipoAccidente = $('#tipo_accidente').val();
+
+
+    //     $.ajax({
+    //         url: url,
+    //         method: 'GET',
+    //         data: {
+    //             fecha_accidente: fechaInicio,
+    //             tipo_accidente: tipoAccidente
+    //         },
+    //         success: function(data){
+    //             let tbodyList = $('#tbody_list')               ;
+    //             tbodyList.empty();
+
+    //             for(let index=0; index < data.length; index++) {
+    //                 const accidente = data[index];
+
+    //                 // Por caída, Por exposición o contacto, Por sobreesfuerzo o golpes, Por movimientos repetitivos
+    //                 let tipoAccidente = "";
+    //                 if(accidente.tipo_accidente === 1) {
+    //                     tipoAccidente = "Por caída";
+    //                 }
+    //                 else if(accidente.tipo_accidente === 2){
+    //                     tipoAccidente = "Por exposición o contacto";
+    //                 }
+    //                 else if(accidente.tipo_accidente === 3){
+    //                     tipoAccidente = "Por sobreesfuerzo o golpes";
+    //                 }
+    //                 else if(accidente.tipo_accidente === 4){
+    //                     tipoAccidente = "Por movimientos repetitivos";
+    //                 }
+
+    //                 // Crea una nueva fila de la tabla y agrega los datos
+    //                 const newRow = `<tr class="col-12">
+    //                                     <td>${accidente.fecha_accidente}</td>
+    //                                     <td>${accidente.descripcion}</td>
+    //                                     <td>${accidente.cantidad_involucrados}</td>
+    //                                     <td>${tipoAccidente}</td>
+    //                                     <td>
+    //                                         <a href="/cliente/accidente/update/${accidente.id}/" class="btn btn-outline-warning btn-warning text-dark">Actualizar</a>
+    //                                         <a href="/cliente/accidente/detail/${accidente.id}/" class="btn btn-outline-info btn-info text-dark">Ver Más</a>
+    //                                     </td>
+    //                                 </tr>`;
+
+    //                 tbodyList.append(newRow); // Agrega la nueva fila a la tabla
+    //             }                
+    //         },
+    //         error: function (error) {
+    //             console.log('Error en la solicitud AJAX:', error);
+    //         }
+    //     });         
+    // };
+
+    // // Agrega un evento para detectar el cambio en el combo box tipo_accidente
+    // $('#tipo_accidente').on('change', combo);
 
     function getCookie(name) {
         var cookieValue = null;
