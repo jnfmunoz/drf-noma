@@ -156,7 +156,7 @@ class Asesoria(models.Model):
     descripcion = models.CharField(max_length=200, null=True, blank=True)
     nombre_fiscalizador = models.CharField(max_length=200)
     numero_fiscalizador = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
     tipo_asesoria = models.ForeignKey(TipoAsesoria, on_delete=models.PROTECT, related_name="tipo_asesoria")
     estado_asesoria = models.ForeignKey(EstadoAsesoria, on_delete=models.PROTECT, related_name="estado_asesoria", default=1)
 

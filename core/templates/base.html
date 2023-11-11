@@ -16,7 +16,8 @@
 </head>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="color:#fff;">No More Accidents</a>      
+        <img src="{% static 'core/img/logo.texto.blanco.png' %}" class="rounded mx-auto d-block img-fluid" alt="..." width="100px">
+        {% comment %} <a class="navbar-brand" href="#" style="color:#fff;">No More Accidents</a>       {% endcomment %}
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav" style="color:#fff;">
             <li class="nav-item">
@@ -86,16 +87,23 @@
 
 {% block content %}{% endblock content %}
 
-<footer>
-    <div class="container">
+<br>
+<br>
+<br>
+<br>
+{% comment %} <div class="footer"> {% endcomment %}
+{% comment %} <footer>
+    <div class="container" id="div-footer">
         <div class="row align-items-center" id="">
             <div class="col-12">
-                <img src="{% static 'core/img/logo.texto.blanco.png' %}" class="rounded mx-auto d-block" alt="..." width="200px">
+                <img src="{% static 'core/img/logo.texto.blanco.png' %}" class="rounded mx-auto d-block img-fluid" alt="..." width="200px">
             </div>
         </div>
     </div>
     <br>
-</footer>
+</footer> {% endcomment %}
+{% comment %} </div> {% endcomment %}
+
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     {% comment %} <script type="text/javascript" src="{% static 'core/js/logout.js' %}"></script>
     <script type="text/javascript" src="{% static 'core/js/login3.js' %}"></script> {% endcomment %}
