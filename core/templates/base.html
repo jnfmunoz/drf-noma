@@ -18,6 +18,10 @@
     <div class="container-fluid">
         <img src="{% static 'core/img/logo.texto.blanco.png' %}" class="rounded mx-auto d-block img-fluid" alt="..." width="100px">
         {% comment %} <a class="navbar-brand" href="#" style="color:#fff;">No More Accidents</a>       {% endcomment %}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav " aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav" style="color:#fff;">
             <li class="nav-item">
@@ -65,8 +69,9 @@
                 </li> {% endcomment %}
             {% comment %} {% endif %} {% endcomment %}
         </ul>
-    </div>
-    <ul class="navbar-nav">
+    
+    {% comment %} <ul class="navbar-nav ml-auto mr-0"> {% endcomment %}
+    <ul class="navbar-nav ml-auto mr-0">
         <li class="nav-item">            
             {% if user.is_authenticated %}
             {% comment %} {% if usuario.is_authenticated %} {% endcomment %}
@@ -82,7 +87,7 @@
         {% endif %}
     </ul>
     </div>
-    
+    </div>
 </nav>
 
 {% block content %}{% endblock content %}
