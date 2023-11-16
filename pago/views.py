@@ -3,32 +3,42 @@ from django.shortcuts import redirect
 from django.conf import settings
 # from transbank.webpay.webpay_plus import WebpayPlus
 from transbank.webpay.webpay_plus.transaction import Transaction
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 
 from asesora.models import Factura
 
 def iniciar_pago(request, factura_id):
-    # Obtiene el id de la factura de la solicitud POST
-    factura_id = request.POST.get('factura_id')
+# def iniciar_pago(request):
+    try:
+        # Obtiene el id de la factura de la solicitud POST
+        factura_id = request.POST.get('factura_id')
 
-    # Obten la factura y su información de tu base de datos
-    factura = Factura.objects.get(id=factura_id)
-    total_a_pagar = factura.total_factura
+        # Obten la factura y su información de tu base de datos
+        factura = Factura.objects.get(id=factura_id)
+        total_a_pagar = factura.total_factura
 
-    # Crear una instancia de la transacción
-    transaction = Transaction()
+        # Crear una instancia de la transacción
+        transaction = Transaction()
 
-    # Inicia la transacción con Transbank
-    response = transaction.create(
-        buy_order=factura_id,
-        session_id=str(factura_id),
-        amount=total_a_pagar,
-        return_url=settings.TRANSBANK['RETURN_URL'],
-    )
+        # Inicia la transacción con Transbank
+        response = transaction.create(
+            buy_order=factura_id,
+            session_id=str(factura_id) if isinstance(factura_id, int) else factura_id,
+            amount=total_a_pagar,
+            return_url=settings.TRANSBANK['RETURN_URL'],
+        )
 
-    url_redirect = response.get('url', '')
+        url_redirect = response.get('url', '')
 
-    return redirect(url_redirect)
+        print(url_redirect)
+
+        return redirect(url_redirect)
+    except Factura.DoesNotExist:
+        return HttpResponse("La factura no existe", status=404)
+
+    except Exception as e:
+        # Manejar cualquier otro error que pueda ocurrir
+        return HttpResponse(f"Error: {str(e)}", status=500)
 
 def retorno_pago(request):
 
@@ -52,3 +62,5 @@ def retorno_pago(request):
     except Exception as e:
         # Manejar cualquier error o excepción que pueda ocurrir
         return JsonResponse({'error': str(e)})
+
+

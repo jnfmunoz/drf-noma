@@ -208,7 +208,9 @@ class Factura(models.Model):
     total_factura = models.FloatField()
     # fkEstadoFactura = models.ForeignKey(EstadoFactura, on_delete=models.PROTECT)
     fkCliente = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='cliente')
-    pagada = models.BooleanField(default=False)
+    # pagada = models.BooleanField(default=False)
+    paypal_id = models.CharField(max_length=255, blank=True, null=True)
+    pagada_con_paypal = models.BooleanField(default=False)
 
 class DetallePago(models.Model):
 

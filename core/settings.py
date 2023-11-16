@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'asesora.apps.AsesoraConfig',
     'cliente.apps.ClienteConfig',
     'pago.apps.PagoConfig',
-    # profesional
+    'core',
     'bootstrap5',
     'crispy_forms',
     'rest_framework',
@@ -175,6 +175,12 @@ TRANSBANK = {
     'INTEGRATION_TYPE': 'TEST',  # Cambia a 'LIVE' en producción
     'API_KEY': TBK_PRIVATE_KEY,
     'COMMERCE_CODE': TBK_COMMERCE_CODE,
-    'RETURN_URL': 'http://127.0.0.1:8000/cliente/factura/list/',  # URL de retorno
-    'WEBPAY_URL': WEBPAY_URL 
+    'RETURN_URL': 'http://127.0.0.1:8000/retorno_pago/',  # URL de retorno
+    # 'RETURN_URL': 'http://127.0.0.1:8000/cliente/factura/list',  # URL de retorno
+    'WEBPAY_URL': WEBPAY_URL,
 }
+
+#PAYPAL
+PAYPAL_CLIENT_ID = 'Aaka4gc_Q-C1u4VKThgtyisyagjoEKypBZY9P_ZiuAP_U3_gTX4jldvftSKarFhOwRDuIdG1LrZj1nO7'
+PAYPAL_SECRET = 'EDGXBiedzLbR1SM-fYypbLu5z4XkJBTCZFBPnZrJD34-EZzP65ZRsv4zK7BLgYx2hUXNqQBM7NuV-aq6'
+PAYPAL_MODE = 'sandbox'  # Puedes cambiar a 'live' en producción

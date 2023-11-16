@@ -13,18 +13,19 @@ from .serializers import (ListAsesoriaSerializer, UpdateCreateAsesoriaSerializer
                           DetailContratoSerializer, ListVisitaSerializer, DetailVisitaSerializer, ListFacturaSerializer,
                           DetailFacturaSerializer, FormularioVisitaSerializer, DetalleFormularioSerializer)
 from .permissions import OwnerDetail
-from .filters import AccidenteFilter
 
 class AsesoriaListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
     permission_classes = [OwnerDetail]
     serializer_class = ListAsesoriaSerializer
 
+
     """
     Concrete view for listing a queryset.
     """
     def get_queryset(self):
-        return Asesoria.objects.filter(fkCliente_id=self.request.user)
+        queryset = Asesoria.objects.filter(fkCliente_id=self.request.user)
+        return queryset.order_by('-fecha_creacion')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -76,14 +77,13 @@ class AccidenteListAV(mixins.ListModelMixin, generics.GenericAPIView):
     
     permission_classes = [OwnerDetail]
     serializer_class = ListAccidenteSerializer
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_class = AccidenteFilter # Filtro personalizado
 
     """
     Concrete view for listing a queryset.
     """
     def get_queryset(self):
-        return Accidente.objects.filter(fkCliente_id=self.request.user)
+        queryset = Accidente.objects.filter(fkCliente_id=self.request.user)
+        return queryset.order_by('-fecha_accidente')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -133,21 +133,22 @@ class AccidenteUpdateAV(mixins.RetrieveModelMixin, mixins.UpdateModelMixin , gen
 
 class CapacitacionListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
-    # permission_classes = [OwnerDetail]
+    permission_classes = [OwnerDetail]
     serializer_class = ListCapacitacionSerializer
 
     """
     Concrete view for listing a queryset.
     """
     def get_queryset(self):
-        return Capacitacion.objects.filter(fkCliente_id=self.request.user)
+        queryset = Capacitacion.objects.filter(fkCliente_id=self.request.user)
+        return queryset.order_by('-fecha_capacitacion')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
 class CapacitacionDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
 
-
+    permission_classes = [OwnerDetail]
     serializer_class = DetailCapacitacionSerializer
     queryset = Capacitacion.objects.all()
 
@@ -159,7 +160,7 @@ class CapacitacionDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
     
 class ContratoListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
-    # permission_classes = [OwnerDetail]
+    permission_classes = [OwnerDetail]
     serializer_class = ListContratoSerializer
 
     """
@@ -173,7 +174,7 @@ class ContratoListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
 class ContratoDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
 
-
+    permission_classes = [OwnerDetail]
     serializer_class = DetailContratoSerializer
     queryset = Contrato.objects.all()
 
@@ -185,20 +186,22 @@ class ContratoDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
     
 class VisitaListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
-    # permission_classes = []
+    permission_classes = [OwnerDetail]
     serializer_class = ListVisitaSerializer
 
     """
     Concrete view for listing a queryset.
     """
     def get_queryset(self):
-        return Visita.objects.filter(fkCliente_id=self.request.user)
+        queryset = Visita.objects.filter(fkCliente_id=self.request.user)
+        return queryset.order_by('-fecha_inicio')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
     
 class VisitaDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
 
+    permission_classes = [OwnerDetail]
     serializer_class = DetailVisitaSerializer
     queryset = Visita.objects.all()
 
@@ -210,20 +213,22 @@ class VisitaDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
     
 class FacturaListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
-    # permission_classes = []
+    permission_classes = [OwnerDetail]
     serializer_class = ListFacturaSerializer
 
     """
     Concrete view for listing a queryset.
     """
     def get_queryset(self):
-        return Factura.objects.filter(fkCliente_id=self.request.user)
+        queryset = Factura.objects.filter(fkCliente_id=self.request.user)
+        return queryset.order_by('-fecha_emision')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
 class FacturaDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
 
+    permission_classes = [OwnerDetail]
     serializer_class = DetailFacturaSerializer
     queryset = Factura.objects.all()
 
@@ -235,6 +240,7 @@ class FacturaDetailAV(mixins.RetrieveModelMixin, generics.GenericAPIView):
     
 class FormularioVisitaAV(mixins.ListModelMixin, generics.GenericAPIView):
 
+    permission_classes = [OwnerDetail]
     serializer_class = FormularioVisitaSerializer
     
     def get_queryset(self):
@@ -245,6 +251,7 @@ class FormularioVisitaAV(mixins.ListModelMixin, generics.GenericAPIView):
     
 class DetalleFormularioAV(mixins.ListModelMixin, generics.GenericAPIView):
 
+    permission_classes = [OwnerDetail]
     serializer_class = DetalleFormularioSerializer
     queryset = DetalleFormulario.objects.all()
 

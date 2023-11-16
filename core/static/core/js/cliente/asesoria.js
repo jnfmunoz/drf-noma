@@ -83,15 +83,29 @@ $(document).ready(function(){
                 })
                 .done(function(response) {
                     // La solicitud POST se completó con éxito
-                    Swal.fire("¡Éxito!", "Solicitud POST exitosa: " + response, "success");
-                    
-                    // Redirigir a la página de listado (reemplaza con la URL deseada)
-                    window.location.href = "/cliente/asesoria/list/";
-                    })
-                    .fail(function(jqXHR, textStatus, errorThrown) {
-                    // La solicitud POST falló
-                    Swal.fire("Error", "Error en la solicitud POST: " + textStatus, "error");
+                    Swal.fire({
+                        icon: "success",
+                        title: "¡Éxito!",
+                        text: "Solicitud de asesoría agregada con éxito",
+                        showConfirmButton: false,
+                        timer: 2000,                                                                    
                     });
+                    setTimeout(function() {
+                        // Redirigir a la página de listado (reemplaza con la URL deseada)
+                        window.location.href = "/cliente/asesoria/list/";
+                    }, 2050);
+                    
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    // La solicitud POST falló
+                    Swal.fire({
+                        icon: "error",
+                        title: "Ops!",
+                        text: "Error al enviar solicitud",
+                        showConfirmButton: false,
+                        timer: 2000,     
+                    });
+                });
                 }
             });
         // Realiza la solicitud POST

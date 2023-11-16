@@ -16,6 +16,7 @@
     </div>
     <br>
     <form action="{% url 'iniciar_pago' factura.id %}" method="post">
+    {% comment %} <form action="{% url 'iniciar_pago'  %}" method="post"> {% endcomment %}
       <div class="container col-md-8" style="text-align: left;">
         {% csrf_token %}
         <h3 id="id" style="text-align: center;"></h3>

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita, Factura, FormularioVisita, DetalleFormulario
+from datetime import date
 
 class ListAsesoriaSerializer(serializers.ModelSerializer):
 
@@ -9,7 +10,8 @@ class ListAsesoriaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Asesoria
-        fields = '__all__'
+        fields = '__all__'  
+        ordering = ['-fecha_creacion']
 
 class UpdateCreateAsesoriaSerializer(serializers.ModelSerializer):
 
@@ -23,6 +25,18 @@ class UpdateCreateAsesoriaSerializer(serializers.ModelSerializer):
         
     def create(self, validated_data):
         return Asesoria.objects.create(**validated_data)
+    
+    def validate_nombre_fiscalizador(self, value):
+        if len(value) <= 5:
+           raise serializers.ValidationError("El nombre del fiscalizador es muy corto!")
+        else:
+            return value
+        
+    def validate_numero_fiscalizador(self, value):
+        if len(value) <= 5 or len(value) > 12:
+            raise serializers.ValidationError("El número del fiscalizador es inválido")
+        else:
+            return value
     
 class DetailAsesoriaSerializer(serializers.ModelSerializer):
 
@@ -49,6 +63,24 @@ class UpdateCreateAccidenteSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Accidente.objects.create(**validated_data)
+    
+    def validate_cantidad_involucrados(self, value):
+        if value <= 0:
+            raise serializers.ValidationError("Ingrese una cantidad válidad de involucrados en el accidente")
+        else:
+            return value
+        
+    def validate_descripcion(self, value):
+        if len(value) <= 15:
+            raise serializers.ValidationError("Ingrese al menos 15 caracteres en el informe de la situación")
+        else:
+            return value
+        
+    def validate_fecha_accidente(self, value):
+        if value > date.today():
+            raise serializers.ValidationError("Ingrese una fecha válida")
+        else:
+            return value
 
 class DetailAccidenteSerializer(serializers.ModelSerializer):
 
