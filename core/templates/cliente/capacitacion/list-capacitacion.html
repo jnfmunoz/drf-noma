@@ -15,15 +15,6 @@
       </div>
     </div>
     <br>    
-    <!-- <div class="container" style="text-align:center;">      
-      <div class="row">
-        <div class="col-12">
-          <a href="new-asesoria.html" class="btn btn-primary col-md-4"><img src="../../assets/img/icons/new-asesoria.png" alt="">Nueva Asesoría</a>
-        </div>
-      </div>
-      <br>
-      <hr>
-    </div> -->
     <br>
     <br>
     <div class="container col-12" style="text-align: center;">
@@ -32,18 +23,18 @@
           <table class="table table-secondary table-bordered table-striped">
             <thead>
               <div class="row">
-                <div class="col-12 col-md-4 padding-our">
-                  <label for="fechainicio">Fecha inicio</label>
+                <div class="col-12 col-md-8 padding-our">
+                  <label for="fechacapacitacion">Fecha Capacitación</label>
                     <div class="input-group">
-                      <input type="date" id="fechainicio" name="fechainicio" class="form-control">
+                      <input type="date" id="fechacapacitacion" name="fechacapacitacion" class="form-control">
                     </div>
                   </div>
-                  <div class="col-12 col-md-4 padding-our">
+                  {% comment %} <div class="col-12 col-md-4 padding-our">
                     <label for="fechatermino">Fecha termino</label>
                     <div class="input-group">
                       <input type="date" id="fechatermino" name="fechatermino" class="form-control">
                     </div>
-                  </div>
+                  </div> {% endcomment %}
                   <div class="col-12 col-md-4 padding-our">
                     <button type="submit" class="btn btn-outline-primary btn-primary text-light mt-3"><img src="{% static 'core/img/icons/search-find.png' %}" alt="" width="25px" height="25px">Filtrar</button>
                     <button type="reset" class="btn btn-outline-secondary btn-secondary text-light mt-3"><img src="{% static 'core/img/icons/clean.png' %}" alt="" width="25px" height="25px"> Restablecer</button>
@@ -74,6 +65,7 @@
               </tr> {% endcomment %}
             </tbody>
         </table>
+      </form>
       </div>
     </div>
     <br>

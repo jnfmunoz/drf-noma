@@ -95,6 +95,50 @@ $(document).ready(function(){
         });
     };
 
+    $('form').submit(function(event) {
+        event.preventDefault();
+
+        let fechaCapacitacion = $('#fechacapacitacion').val();
+
+        // console.log(fechaCapacitacion);
+        $.ajax({
+            url: 'http://127.0.0.1:8000/cliente-api/capacitacion/list/',
+            method: 'GET',
+            data: {
+                search: fechaCapacitacion
+            },
+            success: function(data) {
+                $('#tbody-list').empty();
+
+                if(data.length === 0){
+                    let noResultsRow = '<tr class="col-12"><td colspan="6" class="text-center">Sin resultados</td></tr>';
+                    $('#tbody-list').append(noResultsRow);
+                }
+                else{
+                    $.each(data, function(index, capacitacion){
+                        
+                        const fechaCapacitacion = capacitacion.fecha_capacitacion === null ? "Sin Asignar" : capacitacion.fecha_capacitacion;
+                        let row =   `<tr class="col-12">
+                                        <td>${capacitacion.id}</td>
+                                        <td>${fechaCapacitacion}</td>
+                                        <td>${capacitacion.fkProfesional}</td>
+                                        <td>${capacitacion.direccion}</td>                
+                                        <td>${capacitacion.fkEstadoCapacitacion}</td>
+                                        <td>                                                                
+                                            <a href="/cliente/capacitacion/detail/${capacitacion.id}/" class="btn btn-outline-info btn-info text-dark">Ver Más</a>
+                                        </td>
+                                    </tr>`;
+                        
+                        $('#tbody-list').append(row);
+                    });
+                }
+            },
+            error: function(error) {
+                console.log('Error en la petición AJAX', error);
+            }
+        });
+    });
+
     buildList();
     buildDetail();
 });

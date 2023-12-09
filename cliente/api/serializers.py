@@ -33,8 +33,8 @@ class UpdateCreateAsesoriaSerializer(serializers.ModelSerializer):
             return value
         
     def validate_numero_fiscalizador(self, value):
-        if len(value) <= 5 or len(value) > 12:
-            raise serializers.ValidationError("El número del fiscalizador es inválido")
+        if len(value) < 12 or len(value) > 12:
+            raise serializers.ValidationError("El número del fiscalizador es muy corto!")
         else:
             return value
     
@@ -76,11 +76,11 @@ class UpdateCreateAccidenteSerializer(serializers.ModelSerializer):
         else:
             return value
         
-    def validate_fecha_accidente(self, value):
-        if value > date.today():
-            raise serializers.ValidationError("Ingrese una fecha válida")
-        else:
-            return value
+    # def validate_fecha_accidente(self, value):
+    #     if value > date.today():
+    #         raise serializers.ValidationError("Ingrese una fecha válida")
+    #     else:
+    #         return value
 
 class DetailAccidenteSerializer(serializers.ModelSerializer):
 

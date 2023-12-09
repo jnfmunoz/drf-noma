@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
     'registration.apps.RegistrationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'asesora.apps.AsesoraConfig',
     'cliente.apps.ClienteConfig',
-    'pago.apps.PagoConfig',
+    'webpay.apps.WebpayConfig',
     'core',
     'bootstrap5',
     'crispy_forms',
@@ -168,19 +169,22 @@ else:
 # TRANSBANK
 TBK_COMMERCE_CODE = "597055555532"
 TBK_PRIVATE_KEY =   "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"
-WEBPAY_URL = "https://webpay3gint.transbank.cl"
+WEBPAY_URL = "https://webpay3gint.transbank.cl/" 
 
 # Configuración de Transbank
 TRANSBANK = {
     'INTEGRATION_TYPE': 'TEST',  # Cambia a 'LIVE' en producción
     'API_KEY': TBK_PRIVATE_KEY,
     'COMMERCE_CODE': TBK_COMMERCE_CODE,
-    'RETURN_URL': 'http://127.0.0.1:8000/retorno_pago/',  # URL de retorno
-    # 'RETURN_URL': 'http://127.0.0.1:8000/cliente/factura/list',  # URL de retorno
+    'RETURN_URL': '',  # URL de retorno
     'WEBPAY_URL': WEBPAY_URL,
 }
 
 #PAYPAL
-PAYPAL_CLIENT_ID = 'Aaka4gc_Q-C1u4VKThgtyisyagjoEKypBZY9P_ZiuAP_U3_gTX4jldvftSKarFhOwRDuIdG1LrZj1nO7'
-PAYPAL_SECRET = 'EDGXBiedzLbR1SM-fYypbLu5z4XkJBTCZFBPnZrJD34-EZzP65ZRsv4zK7BLgYx2hUXNqQBM7NuV-aq6'
-PAYPAL_MODE = 'sandbox'  # Puedes cambiar a 'live' en producción
+# PAYPAL_CLIENT_ID = ''
+# PAYPAL_SECRET = ''
+# PAYPAL_MODE = 'sandbox'  # Puedes cambiar a 'live' en producción
+
+# MERCADO PAGO
+# MERCADOPAGO_PUBLIC_KEY = 'APP_USR-0ef439fa-2389-4bc9-80e1-ba71d776cd3b'
+# MERCADOPAGO_ACCESS_TOKEN = 'APP_USR-3824126542134148-112023-5b1ebd3e2061d6e3f9e866e30ac94cbe-1557662429'

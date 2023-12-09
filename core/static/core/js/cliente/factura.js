@@ -56,6 +56,52 @@ $(document).ready(function(){
         });
     };
 
+    $('form').submit(function(event) {
+        event.preventDefault();
+
+        let fechaEmision = $('#fecha_emision').val();
+        let fechaVencimento = $('#fecha_vencimento').val();
+
+        // console.log(fechaEmision, fechaVencimento)
+
+        $.ajax({
+            url: 'http://127.0.0.1:8000/cliente-api/factura/list/',
+            method: 'GET',
+            data: {
+                search: fechaEmision + ',' + fechaVencimento
+            },
+            success: function(data){
+                $('#tbody-list').empty();
+
+                if(data.length === 0) {
+                    let noResultsRow = '<tr class="col-12"><td colspan="6" class="text-center">Sin resultados</td></tr>';
+                    $('#tbody-list').append(noResultsRow);
+                }
+                else{
+                    $.each(data, function(index, factura){
+                        
+                        const estadoPago = factura.pagada ? 'Pagada' : 'Pendiente de Pago';
+                        let row = `<tr class="col-12">
+                                        <td class="col-2">${factura.id}</td>
+                                        <td class="col-2">${factura.fecha_emision}</td>
+                                        <td class="col-2">${factura.fecha_vencimento}</td>
+                                        <td class="col-2">${factura.total_factura}</td>
+                                        <td class="col-2">${estadoPago}</td>
+                                        <td class="col-3">
+                                            <a href="/cliente/factura/detail/${factura.id}/" class="btn btn-outline-info btn-info text-dark">Ver Más</a>
+                                        </td>                                                                        
+                                    </tr>`;
+                        
+                        $('#tbody-list').append(row);
+                    });
+                }
+            },
+            error: function(error){
+                console.error('Error en la petición AJAX',error);
+            }
+        });
+    });
+
     buildList();
     buildDetail();
 });

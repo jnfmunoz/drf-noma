@@ -24,10 +24,7 @@ urlpatterns = [
 
     # cliente 
     path('cliente/', include('cliente.urls')), # http://127.0.0.1:8000/cliente/
-
-    # pagos
-    path('pagos/', include('pago.urls')), # http://127.0.0.1:8000/pagos/
-
+    
     # cliente-api
     path('cliente-api/', include('cliente.api.urls')), # http://127.0.0.1:8000/cliente-api/
     # asesora-api

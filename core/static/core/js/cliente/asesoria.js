@@ -41,6 +41,40 @@ $(document).ready(function(){
         let numero = $("#numero_fiscalizador").val();
         let email = $("#email").val();
 
+        // Validaciones
+        if(nombre_fiscalizador.length <= 5){
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "El nombre del fiscalizador es muy corto!",
+                showConfirmButton: false,
+                timer: 5000,
+            });
+            return
+        }
+
+        if (numero.length < 12 || numero.length > 12) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "El número del fiscalizador es inválido!",
+                showConfirmButton: false,
+                timer: 5000,
+            });
+            return;
+        }
+        
+        if (numero.substring(0,4) !== "+569") {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "El número del fiscalizador es inválido, asegúrate de que empiece con +569",
+                showConfirmButton: false,
+                timer: 5000,
+            });
+            return;
+        }
+
         // Crea un objeto con los datos que deseas enviar en la solicitud POST
         var dataToSend = {
             // "descripcion": descripcion,
@@ -75,7 +109,7 @@ $(document).ready(function(){
                         xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
                     },
                     success: function(response) {
-                        console.log("Respuesta:", response);
+                        // console.log("Respuesta:", response);
                     },
                     error: function(error) {
                         console.error("Error:", error);
@@ -342,6 +376,57 @@ $(document).ready(function(){
             });
         });     
     };
+
+    $('form').submit(function(event) {
+        event.preventDefault();
+
+        // Obtener los valores de las fechas
+        var fechaInicio = $('#fechainicio').val();
+        var fechaTermino = $('#fechatermino').val();
+
+        // console.log(fechaInicio, fechaTermino)
+
+        // Realizar petición AJAX
+        $.ajax({
+            url: 'http://127.0.0.1:8000/cliente-api/asesoria/list/',
+            method: 'GET',
+            data: {
+                search: fechaInicio + ',' + fechaTermino
+            },
+            success: function(data) {
+                // Limpiar la tabla antes de agregar los nuevos resultados
+                $('#tbody-list').empty();
+                    
+                if(data.length === 0){
+                    // Si no hay resultados, mostrar un mensaje en la tabla
+                    let noResultsRow = '<tr class="col-12"><td colspan="5" class="text-center">Sin resultados</td></tr>';
+                    $('#tbody-list').append(noResultsRow);
+                }
+                else{
+                    // Iterar sobre los resultados y agregarlos a la tabla
+                    $.each(data, function(index, asesoria) {
+
+                        const fechaTermino = asesoria.fecha_termino === null ? "Sin Asignar" : asesoria.fecha_termino;
+                        var row = `<tr class="col-12">
+                                        <td class="col-2">${asesoria.fecha_creacion}</td>                                        
+                                        <td class="col-2">${fechaTermino}</td>
+                                        <td class="col-2">${asesoria.tipo_asesoria}</td>
+                                        <td class="col-2">${asesoria.estado_asesoria}</td>
+                                        <td class="col-3">
+                                            <a href="/cliente/asesoria/update/${asesoria.id}/" class="btn btn-outline-warning btn-warning text-dark">Actualizar</a>                                                        
+                                            <a href="/cliente/asesoria/detail/${asesoria.id}/" class="btn btn-outline-info btn-info text-dark">Ver Más</a>
+                                        </td>                                                        
+                                    </tr>`;
+
+                        $('#tbody-list').append(row);                    
+                    });
+                }
+            },
+            error: function(error){
+                console.log('Error en la petición AJAX: ', error);
+            }    
+        });
+    });
 
     function getCookie(name) {
         var cookieValue = null;

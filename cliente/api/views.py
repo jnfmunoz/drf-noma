@@ -18,7 +18,8 @@ class AsesoriaListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
     permission_classes = [OwnerDetail]
     serializer_class = ListAsesoriaSerializer
-
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['fecha_creacion', 'fecha_termino']
 
     """
     Concrete view for listing a queryset.
@@ -77,6 +78,8 @@ class AccidenteListAV(mixins.ListModelMixin, generics.GenericAPIView):
     
     permission_classes = [OwnerDetail]
     serializer_class = ListAccidenteSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['fecha_accidente']
 
     """
     Concrete view for listing a queryset.
@@ -135,6 +138,9 @@ class CapacitacionListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
     permission_classes = [OwnerDetail]
     serializer_class = ListCapacitacionSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['fecha_capacitacion']
+
 
     """
     Concrete view for listing a queryset.
@@ -188,6 +194,8 @@ class VisitaListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
     permission_classes = [OwnerDetail]
     serializer_class = ListVisitaSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['fecha_inicio', 'fecha_termino']
 
     """
     Concrete view for listing a queryset.
@@ -215,6 +223,8 @@ class FacturaListAV(mixins.ListModelMixin, generics.GenericAPIView):
 
     permission_classes = [OwnerDetail]
     serializer_class = ListFacturaSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['fecha_emision', 'fecha_vencimento']
 
     """
     Concrete view for listing a queryset.

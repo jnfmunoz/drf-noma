@@ -1,11 +1,23 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 import requests
+import datetime
 
 from asesora.models import Asesoria, Accidente, Capacitacion, Contrato, Visita, Factura
 
 # Create your views here.
 def list_asesoria(request):
+
+    # asesorias = Asesoria.objects.all()
+
+    # filter_fechainicio = request.GET.get('fechainicio', False)
+    # if filter_fechainicio:
+    #     try:
+    #         filter_fechainicio = datetime.datetime.strptime(filter_fechainicio, '%Y-m-d%').date()
+    #         asesorias = asesorias.filter(fechainicio__gte=filter_fechainicio)
+    #     except ValueError:
+    #         pass
+
     return render(request, 'cliente/asesoria/list-asesoria.html');
 
 def new_asesoria(request):
