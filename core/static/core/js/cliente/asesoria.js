@@ -75,6 +75,18 @@ $(document).ready(function(){
             return;
         }
 
+        if (!isValidEmail(email)) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "El correo electrónico ingresado no es válido",
+                showConfirmButton: false,
+                timer: 5000,
+            });
+            return;
+        }
+    
+
         // Crea un objeto con los datos que deseas enviar en la solicitud POST
         var dataToSend = {
             // "descripcion": descripcion,
@@ -142,58 +154,6 @@ $(document).ready(function(){
                 });
                 }
             });
-        // Realiza la solicitud POST
-        // $.ajax({
-        //     type: "POST",
-        //     url: url,
-        //     data: JSON.stringify(dataToSend),
-        //     contentType: "application/json",
-        //     beforeSend: function(xhr, settings) {
-        //         xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
-        //     },
-        //     success: function(response) {
-        //         console.log("Respuesta:", response);
-        //     },
-        //     error: function(error) {
-        //         console.error("Error:", error);
-        //     }
-        // });
-
-        // if (confirm("¿Estás seguro de que deseas enviar el formulario?")) {
-        //     // El usuario hizo clic en "Aceptar", enviar la solicitud POST aquí
-        //     // Realiza la solicitud POST
-        //     $.ajax({
-        //         type: "POST",
-        //         url: url,
-        //         data: JSON.stringify(dataToSend),
-        //         contentType: "application/json",
-        //         beforeSend: function(xhr, settings) {
-        //             xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
-        //         },
-        //         success: function(response) {
-        //             console.log("Respuesta:", response);
-        //         },
-        //         error: function(error) {
-        //             console.error("Error:", error);
-        //         }
-        //     })
-        //     .done(function(response) {
-        //         // La solicitud POST se completó con éxito
-        //         // incorportar en vez de las alert SweetAlert2
-        //         alert("Solicitud POST exitosa: " + response);
-
-        //         // Redirigir la página de listado
-        //         window.location.href = "/cliente/list/";
-        //     })
-        //     .fail(function(jqXHR, textStatus, errorThrown) {
-        //         // La solicitud POST falló
-        //         alert("Error en la solicitud POST: " + textStatus);
-        //       });
-        // } 
-        // else {
-        //     // El usuario hizo clic en "Cancelar", no se envía la solicitud POST
-        //     alert("Solicitud POST cancelada.");
-        // }
     });
 
     function buildDetail(){
@@ -442,6 +402,14 @@ $(document).ready(function(){
         }
         return cookieValue;
     };
+
+    
+    // Función para validar el formato del correo electrónico
+    function isValidEmail(email) {
+        // Expresión regular para validar el formato del correo electrónico
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
 
     buildList();
     buildDetail();

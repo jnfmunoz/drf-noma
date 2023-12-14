@@ -21,12 +21,12 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-
     # cliente 
     path('cliente/', include('cliente.urls')), # http://127.0.0.1:8000/cliente/
     
     # cliente-api
     path('cliente-api/', include('cliente.api.urls')), # http://127.0.0.1:8000/cliente-api/
+
     # asesora-api
     path('asesora-api/', include('asesora.api.urls')), # http://127.0.0.1:8000/asesora-api/
 
@@ -35,6 +35,9 @@ urlpatterns = [
 
     # path de auth
     path('accounts/', include('django.contrib.auth.urls')),
+
+    # paypal
+    path('paypal/', include('paypal.standard.ipn.urls')),
 
     # temporary login and logout api 
     path('api-auth/', include('rest_framework.urls')), 

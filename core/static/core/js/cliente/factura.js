@@ -12,7 +12,7 @@ $(document).ready(function(){
                 for(let index = 0; index < data.length; index++) {
                     const factura = data[index];
 
-                    const estadoPago = factura.pagada ? 'Pagada' : 'Pendiente de Pago';
+                    const estadoPago = factura.pagado ? 'Pagada' : 'Pendiente de Pago';
                     
                     facturaList = facturaList + `<tr class="col-12">
                                                     <td class="col-2">${factura.id}</td>
@@ -80,7 +80,7 @@ $(document).ready(function(){
                 else{
                     $.each(data, function(index, factura){
                         
-                        const estadoPago = factura.pagada ? 'Pagada' : 'Pendiente de Pago';
+                        const estadoPago = factura.pagado ? 'Pagada' : 'Pendiente de Pago';
                         let row = `<tr class="col-12">
                                         <td class="col-2">${factura.id}</td>
                                         <td class="col-2">${factura.fecha_emision}</td>

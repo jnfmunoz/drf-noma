@@ -1,5 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from paypal.standard.forms import PayPalPaymentsForm
+from core import settings
+from django.contrib import messages
+from django.shortcuts import get_object_or_404
+
 import requests
 import datetime
 
@@ -25,6 +31,7 @@ def new_asesoria(request):
 
 def detail_asesoria(request, pk):
     asesoria = Asesoria.objects.get(pk=pk)
+    
     context = {'asesoria':asesoria}
 
     return render(request, 'cliente/asesoria/detail-asesoria.html', context);
@@ -97,9 +104,56 @@ def list_factura(request):
 
 def detail_factura(request, pk):
     factura = Factura.objects.get(pk=pk)
-    context = {'factura':factura}
+    host = request.get_host()
+
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': str(factura.total_factura),
+        'item_name': 'Pago Servicios',
+        'invoice': str(factura.pk),
+        'currency': 'USD', #CLP
+        'custom': str(factura.pk),
+        'notify_url': f'http://{host}{reverse("paypal-ipn")}',
+        'return_url': f'http://{host}{reverse("paypal-return")}?id_factura={factura.pk}',
+        'cancel_return': f'http://{host}{reverse("paypal-cancel")}',
+    }
+
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {'form': form, 'factura': factura}
 
     return render(request, 'cliente/factura/detail-factura.html', context);
+
+def paypal_return(request):
+
+    # Obtén la URL completa, incluyendo los parámetros
+    # return_url = request.get_full_path()
+
+    # Imprime o registra la URL en la consola o el sistema de registro
+    # print(f'Return URL from PayPal: {return_url}')
+
+    # Obtén el ID de la factura desde el parámetro en la URL o desde donde lo tengas
+    factura_id = request.GET.get('id_factura')
+
+    # Asegúrate de manejar adecuadamente el caso en el que el ID no esté presente
+    if not factura_id:
+        messages.error(request, 'Invalid request. Factura ID not provided.')
+        return redirect('factura-list')
+
+    # Obtén la factura correspondiente
+    factura = get_object_or_404(Factura, pk=factura_id)
+
+    # Marcar la factura como pagada
+    factura.pagado = True
+    factura.save()
+
+    messages.success(request,'You\'ve successfully made a payment!')
+    
+    return redirect('factura-list')
+
+def paypal_cancel(request):
+    
+    messages.success(request,'Your order has been cancelled.')
+    return redirect('factura-list')
 
 def list_item(request):
     return render(request, 'cliente/formulario-visita/list-item.html');

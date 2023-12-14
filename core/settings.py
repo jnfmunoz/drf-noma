@@ -26,13 +26,13 @@ SECRET_KEY = 'django-insecure-vr*hr34l&3%g7(iv&=frd*v$#21wk+mq)udexs-gp6m4ah=5r!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    
+    'paypal.standard.ipn',
     'registration.apps.RegistrationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'asesora.apps.AsesoraConfig',
-    'cliente.apps.ClienteConfig',
-    'webpay.apps.WebpayConfig',
+    'cliente.apps.ClienteConfig',    
     'core',
     'bootstrap5',
     'crispy_forms',
@@ -180,11 +179,7 @@ TRANSBANK = {
     'WEBPAY_URL': WEBPAY_URL,
 }
 
-#PAYPAL
-# PAYPAL_CLIENT_ID = ''
-# PAYPAL_SECRET = ''
-# PAYPAL_MODE = 'sandbox'  # Puedes cambiar a 'live' en producción
+PAYPAL_TEST = True
+PAYPAL_RECEIVER_EMAIL = 'sb-jiir415177423@business.example.com'
 
-# MERCADO PAGO
-# MERCADOPAGO_PUBLIC_KEY = 'APP_USR-0ef439fa-2389-4bc9-80e1-ba71d776cd3b'
-# MERCADOPAGO_ACCESS_TOKEN = 'APP_USR-3824126542134148-112023-5b1ebd3e2061d6e3f9e866e30ac94cbe-1557662429'
+CSRF_TRUSTED_ORIGINS = ['https://0640-190-114-32-197.ngrok-free.app']

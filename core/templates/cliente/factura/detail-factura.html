@@ -15,18 +15,17 @@
       </div>
     </div>
     <br>
-    <form action="" method="post">
+    {% comment %} <form action="" method="post"> {% endcomment %}
     {% comment %} <form action="{% url 'iniciar_pago' factura.id %}" method="post"> {% endcomment %}
     {% comment %} <form action="{% url 'iniciar_pago'  %}" method="post"> {% endcomment %}
       <div class="container col-md-8" style="text-align: left;">
         {% csrf_token %}
-        <h3 id="id" style="text-align: center;"></h3>
-        
-        <hr>
-        <h5 id="fecha_emision"></h5>
-        <h5 id="fecha_vencimento"></h5>
-        <h5 id="total_factura"></h5>
-        <h5 id="pagada"></h5>
+        <h3>N°: {{factura.id}}</h3>
+        <hr>        
+        <h5>fecha emision: {{factura.fecha_emision}}</h5>
+        <h5>fecha vencimiento: {{factura.fecha_vencimento}}</h5>
+        <h5>total factura: {{factura.total_factura}}</h5>
+        <h5>pagada: {{factura.pagado}}</h5>        
       </div>
   
       <br>
@@ -39,16 +38,13 @@
           </div>
           <!-- aqui deberia estar el boton de pagar -->
           <div class="container col-md-4" style="text-align: center;">
-            <input type="hidden" name="factura_id" value="{{ factura.id }}">
-            <button type="submit" class="btn btn-warning"><img src="{% static 'core/img/icons/payment.png' %}" alt="" width="38px" height="38px">Pagar</button>
-            <!-- <a href="" class="btn btn-warning col-md-12"><img src="{% static 'core/img/icons/payment.png' %}" alt="" width="38px" height="38px">Pagar</a> -->
+            {{form.render}}
           </div>
-          <div class="container col-md-4">
-            <!-- <button>Editar</button> -->
+          <div class="container col-md-4">                    
           </div>
         </div>
       </div>
-    </form>
+    {% comment %} </form> {% endcomment %}
     <br>
     <br>
     <br>
@@ -95,5 +91,5 @@
     {% endcomment %}
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script type="text/javascript" src="{% static 'core/js/cliente/factura.js' %}"></script>
+    {% comment %} <script type="text/javascript" src="{% static 'core/js/cliente/factura.js' %}"></script> {% endcomment %}
 {% endblock %}

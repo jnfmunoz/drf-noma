@@ -231,7 +231,7 @@ class FacturaListAV(mixins.ListModelMixin, generics.GenericAPIView):
     """
     def get_queryset(self):
         queryset = Factura.objects.filter(fkCliente_id=self.request.user)
-        return queryset.order_by('-fecha_emision')
+        return queryset.order_by('-id','-fecha_emision')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)

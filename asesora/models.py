@@ -56,13 +56,6 @@ class EstadoAsesoria(models.Model):
     def __str__(self) -> str:
         return self.descripcion
 
-# class EstadoFactura(models.Model):
-
-#     descripcion = models.CharField(max_length=200)
-    
-#     def __str__(self) -> str:
-#         return self.descripcion
-
 class EstadoVisita(models.Model):
 
     descripcion = models.CharField(max_length=200)
@@ -86,18 +79,13 @@ class EstadoServicio(models.Model):
 
 class Usuario(models.Model):
     
-    # user_auth = models.OneToOneField(User, on_delete=models.PROTECT)
     password = models.CharField(max_length=128)
-    # last_login = models.DateTimeField(null=True, blank=True) #Por defecto que sea null
-    # is_superurser = models.BooleanField() #Por defecto que sea 0
     username = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     email = models.EmailField(blank=True)
-    # is_staff = models.BooleanField()
     is_active = models.BooleanField()
-    date_joined = models.DateField(auto_now_add=True)    
-    # tipo_usuario = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
+    date_joined = models.DateField(auto_now_add=True)
     auth_group = models.ForeignKey(Group, on_delete=models.PROTECT)
 
 class Administrador(models.Model):
@@ -180,9 +168,7 @@ class Capacitacion(models.Model):
     fkProfesional = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profesional', default=None, null=True, blank=True)
     descripcion = models.CharField(max_length=200)
     cant_asistente = models.IntegerField()
-    # cant_asistente_final = models.IntegerField()
     lista_asist = models.JSONField(null=True)
-    #fecha_ingreso = models.DateField()
     fecha_capacitacion = models.DateField()
     direccion = models.CharField(max_length=200)
     fkComuna = models.ForeignKey(Comuna, on_delete=models.PROTECT, verbose_name='Comuna')
@@ -207,12 +193,7 @@ class Factura(models.Model):
     fecha_vencimento = models.DateField()
     total_factura = models.FloatField()
     fkCliente = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='cliente')
-    transaccion_id = models.CharField(max_length=50, blank=True, null=True)
     pagado = models.BooleanField(default=False)
-    # fkEstadoFactura = models.ForeignKey(EstadoFactura, on_delete=models.PROTECT)
-    # pagada = models.BooleanField(default=False)
-    # paypal_id = models.CharField(max_length=255, blank=True, null=True)
-    # pagada_con_paypal = models.BooleanField(default=False)
 
 class DetallePago(models.Model):
 
@@ -277,5 +258,3 @@ class IdxUsr(models.Model):
     
     fkUsuario = models.OneToOneField(Usuario, on_delete=models.PROTECT)
     fkUser = models.OneToOneField(User, on_delete=models.PROTECT)
-
-# class detalleFactura(models.Model):

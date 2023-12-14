@@ -30,6 +30,10 @@ urlpatterns = [
     path('factura/list/', views.list_factura, name='factura-list'),
     path('factura/detail/<int:pk>/', views.detail_factura, name='factura-detail'),
 
+    path('paypal-return/', views.paypal_return, name='paypal-return'),
+    path('paypal-cancel/', views.paypal_cancel, name='paypal-cancel'),
+
     # FORMULARIO VISITA
     path('formulario-visita/list/', views.list_item, name='formulario-visita'),
+
 ]
